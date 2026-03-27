@@ -6,22 +6,25 @@ import { urlFor } from "@/sanity/image";
 const components: any = {
   types: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    image: ({ value }: { value: any }) => (
-      <figure className="my-8">
-        <Image
-          src={urlFor(value).width(1200).url()}
-          alt={value.alt || ""}
-          width={1200}
-          height={675}
-          className="w-full"
-        />
-        {value.caption ? (
-          <figcaption className="font-sans text-sm text-meta mt-2 text-center">
-            {value.caption}
-          </figcaption>
-        ) : null}
-      </figure>
-    ),
+    image: ({ value }: { value: any }) => {
+      if (!value?.asset) return null;
+      return (
+        <figure className="my-8">
+          <Image
+            src={urlFor(value).width(1200).url()}
+            alt={value.alt || ""}
+            width={1200}
+            height={675}
+            className="w-full"
+          />
+          {value.caption ? (
+            <figcaption className="font-sans text-sm text-meta mt-2 text-center">
+              {value.caption}
+            </figcaption>
+          ) : null}
+        </figure>
+      );
+    },
   },
   marks: {
     link: ({
