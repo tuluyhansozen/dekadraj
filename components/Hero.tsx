@@ -1,0 +1,45 @@
+export function Hero() {
+  return (
+    <section className="min-h-screen flex items-center justify-center px-8 pt-32 pb-24">
+      <div className="max-w-[1100px] mx-auto text-center space-y-8">
+        {/* Main Logo */}
+        <h1 className="font-serif text-7xl lg:text-8xl font-bold text-action mb-6 tracking-tight">
+          dekadraj
+        </h1>
+
+        {/* Subtitle */}
+        <p className="font-serif italic text-2xl lg:text-3xl text-ink leading-relaxed max-w-[800px] mx-auto">
+          Politik minimalizm, entelektüel doku ve sinematik direniş. Kadrın
+          dışına çıkanların dijital mecmuası.
+        </p>
+
+        {/* Manifesto Text */}
+        <div className="pt-12 max-w-[700px] mx-auto">
+          <p className="font-sans text-base text-ink leading-loose">
+            Sight & Sound&apos;un editoryal ciddiyeti, Altyazı&apos;nın
+            kültürel derinliği ve Othon&apos;un modernist estetiğini birleştiren
+            Dekadraj, sinemanın hafıza ve direniş aracı olduğuna inanır.
+          </p>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="pt-16 animate-bounce">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#7D0A0A"
+            strokeWidth="2"
+            strokeLinecap="square"
+            strokeLinejoin="miter"
+            className="mx-auto"
+          >
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <polyline points="19 12 12 19 5 12" />
+          </svg>
+        </div>
+      </div>
+    </section>
+  );
+}
