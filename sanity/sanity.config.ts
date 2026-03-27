@@ -14,6 +14,7 @@ export default defineConfig({
   title: "Dekadraj CMS",
   projectId,
   dataset,
+  basePath: "/studio",
   plugins: [
     structureTool({
       structure: (S) =>
