@@ -32,11 +32,11 @@ export const article = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "author",
-      title: "Yazar",
-      type: "reference",
-      to: [{ type: "author" }],
-      validation: (rule) => rule.required(),
+      name: "authors",
+      title: "Yazarlar",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "author" }] }],
+      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: "publishedAt",
@@ -85,7 +85,7 @@ export const article = defineType({
   preview: {
     select: {
       title: "title",
-      author: "author.name",
+      author: "authors[0].name",
       media: "coverImage",
     },
     prepare({ title, author, media }) {
