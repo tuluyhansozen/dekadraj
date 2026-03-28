@@ -61,7 +61,7 @@ export default async function ArticlePage({
           </p>
         ) : null}
 
-        <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-ink leading-[1.1]">
+        <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-ink leading-[1.1]">
           {article.title}
         </h1>
 
@@ -104,14 +104,14 @@ export default async function ArticlePage({
       ) : null}
 
       {/* Body + Sidebar */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        {/* Share Sidebar */}
-        <aside className="hidden lg:block lg:col-span-1">
+      <div className="relative max-w-[800px] mx-auto">
+        {/* Share Sidebar — desktop only */}
+        <aside className="hidden lg:block absolute -left-20 top-0">
           <ShareSidebar title={article.title} slug={article.slug} />
         </aside>
 
         {/* Article Body */}
-        <div className="lg:col-span-8">
+        <div>
           {article.body ? (
             <PortableTextRenderer value={article.body} />
           ) : null}
@@ -124,7 +124,7 @@ export default async function ArticlePage({
                   (topic: { title: string; slug: string }) => (
                     <span
                       key={topic.slug}
-                      className="font-sans text-[11px] font-bold uppercase tracking-wider text-meta border border-meta px-3 py-2"
+                      className="font-sans text-xs font-bold uppercase tracking-wider text-meta border border-meta px-3 py-2"
                     >
                       {topic.title}
                     </span>
@@ -133,6 +133,11 @@ export default async function ArticlePage({
               </div>
             </div>
           ) : null}
+
+          {/* Share — mobile only */}
+          <div className="lg:hidden">
+            <ShareSidebar title={article.title} slug={article.slug} />
+          </div>
 
           {/* Author Bio */}
           <AuthorBio author={article.author} />

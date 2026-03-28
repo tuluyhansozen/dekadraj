@@ -28,6 +28,7 @@ export function AuthorBio({ author }: AuthorBioProps) {
               alt={author.name}
               width={160}
               height={160}
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           ) : (

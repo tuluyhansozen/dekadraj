@@ -66,7 +66,7 @@ export default async function AuthorPage({
                 author.photo ? "lg:col-span-2 space-y-6" : "lg:col-span-3 space-y-6"
               }
             >
-              <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-canvas leading-[1.1]">
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-canvas leading-[1.1]">
                 {author.name}
               </h1>
               {author.bio ? (

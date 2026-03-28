@@ -61,8 +61,9 @@ export function ContactForm() {
           id="name"
           type="text"
           autoComplete="name"
+          placeholder="İsminiz…"
           {...register("name")}
-          className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-base text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/30 focus:border-action transition-colors"
+          className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-base text-ink placeholder:text-meta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/30 focus:border-action transition-colors"
         />
         {errors.name ? (
           <p className="font-sans text-sm text-action mt-1">{errors.name.message}</p>
@@ -78,8 +79,9 @@ export function ContactForm() {
           type="email"
           autoComplete="email"
           spellCheck={false}
+          placeholder="ornek@email.com"
           {...register("email")}
-          className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-base text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/30 focus:border-action transition-colors"
+          className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-base text-ink placeholder:text-meta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/30 focus:border-action transition-colors"
         />
         {errors.email ? (
           <p className="font-sans text-sm text-action mt-1">{errors.email.message}</p>
@@ -93,8 +95,9 @@ export function ContactForm() {
         <textarea
           id="message"
           rows={6}
+          placeholder="Mesajınız…"
           {...register("message")}
-          className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-base text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/30 focus:border-action transition-colors resize-none"
+          className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-base text-ink placeholder:text-meta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/30 focus:border-action transition-colors resize-none"
         />
         {errors.message ? (
           <p className="font-sans text-sm text-action mt-1">{errors.message.message}</p>

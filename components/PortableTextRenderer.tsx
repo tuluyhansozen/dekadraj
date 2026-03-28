@@ -15,6 +15,7 @@ const components: any = {
             alt={value.alt || ""}
             width={1200}
             height={675}
+            loading="lazy"
             className="w-full"
           />
           {value.caption ? (

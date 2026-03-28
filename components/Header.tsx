@@ -61,13 +61,11 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
-          isScrolled || isMobileMenuOpen ? "bg-canvas" : "bg-transparent"
+        className={`fixed top-0 left-0 w-full z-50 h-[60px] transition-colors duration-300 ${
+          isScrolled || isMobileMenuOpen
+            ? "bg-canvas border-b border-action"
+            : "bg-transparent border-b border-transparent"
         }`}
-        style={{
-          height: "60px",
-          borderBottom: isScrolled || isMobileMenuOpen ? "1px solid #7D0A0A" : "none",
-        }}
       >
         <div className="max-w-[1400px] mx-auto px-8 h-full flex items-center justify-between">
           <Link

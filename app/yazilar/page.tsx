@@ -26,7 +26,7 @@ export default async function YazilarPage({
 
   return (
     <section className="max-w-[1400px] mx-auto px-8 py-24">
-      <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-ink mb-12">
+      <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-ink mb-12">
         Arşiv
       </h1>
 

@@ -89,7 +89,7 @@ export default async function HakkimizdaPage() {
     <div>
       {/* Manifesto */}
       <section className="max-w-[1400px] mx-auto px-8 py-24">
-        <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-ink mb-12 text-center">
+        <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-ink mb-12 text-center">
           Manifesto
         </h1>
 
@@ -176,7 +176,7 @@ export default async function HakkimizdaPage() {
 
       {/* All Writers */}
       {writers.length > 0 && (
-        <section className="max-w-[1400px] mx-auto px-8 pb-24">
+        <section className="max-w-[1400px] mx-auto px-8 py-24">
           <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-ink mb-4">
             Yazarlar
           </h2>

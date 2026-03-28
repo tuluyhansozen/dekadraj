@@ -15,7 +15,7 @@ export function ListView({ articles }: ListViewProps) {
   if (!articles || articles.length === 0) return null;
 
   return (
-    <section className="max-w-[1100px] mx-auto px-8 py-24">
+    <section className="max-w-[1400px] mx-auto px-8 py-24">
       <div className="space-y-0">
         {articles.map((article) => (
           <Link key={article._id} href={`/yazilar/${article.slug}`}>

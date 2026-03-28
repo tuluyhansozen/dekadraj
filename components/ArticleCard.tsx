@@ -28,6 +28,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
               alt={article.coverImage.alt || article.title}
               width={600}
               height={400}
+              loading="lazy"
               className="w-full aspect-[3/2] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
           </div>
@@ -61,7 +62,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
           {article.topics.map((topic) => (
             <span
               key={topic.slug}
-              className="font-sans text-[11px] font-bold text-meta uppercase tracking-wider border border-meta px-2 py-1 hover:border-action hover:text-action transition-colors duration-300"
+              className="font-sans text-xs font-bold text-meta uppercase tracking-wider border border-meta px-2 py-1 hover:border-action hover:text-action transition-colors duration-300"
             >
               {topic.title}
             </span>
