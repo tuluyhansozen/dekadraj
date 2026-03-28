@@ -19,7 +19,7 @@ const articleFields = `
   featured,
   coverImage,
   "category": category->{ title, "slug": slug.current },
-  "author": author->{ name, "slug": slug.current, photo },
+  "author": authors[0]->{ name, "slug": slug.current, photo, bio },
   "topics": topics[]->{ title, "slug": slug.current }
 `;
 
@@ -45,7 +45,7 @@ export const getRecentArticles = cache(async (limit: number) => {
 export const getListArticles = cache(async (limit: number) => {
   if (!client) return [];
   return client.fetch(
-    `*[_type == "article"] | order(publishedAt desc)[0...${limit}]{ _id, title, "slug": slug.current, publishedAt, "author": author->{ name } }`
+    `*[_type == "article"] | order(publishedAt desc)[0...${limit}]{ _id, title, "slug": slug.current, publishedAt, "author": authors[0]->{ name } }`
   );
 });
 
@@ -101,7 +101,7 @@ export const getAuthorBySlug = cache(async (slug: string) => {
 export const getArticlesByAuthor = cache(async (authorSlug: string) => {
   if (!client) return [];
   return client.fetch(
-    `*[_type == "article" && author->slug.current == $authorSlug] | order(publishedAt desc){ ${articleFields} }`,
+    `*[_type == "article" && $authorSlug in authors[]->slug.current] | order(publishedAt desc){ ${articleFields} }`,
     { authorSlug }
   );
 });
@@ -117,6 +117,16 @@ export const getAllAuthors = cache(async () => {
     `*[_type == "author"] | order(name asc){ name, "slug": slug.current, bio, photo }`
   );
 });
+
+export const getRelatedArticles = cache(
+  async (categorySlug: string, excludeId: string) => {
+    if (!client) return [];
+    return client.fetch(
+      `*[_type == "article" && category->slug.current == $categorySlug && _id != $excludeId] | order(publishedAt desc)[0...3]{ ${articleFields} }`,
+      { categorySlug, excludeId }
+    );
+  }
+);
 
 export const getSiteSettings = cache(async () => {
   if (!client) return null;

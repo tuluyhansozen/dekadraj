@@ -1,9 +1,12 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { getArticleBySlug, getAllArticleSlugs } from "@/sanity/client";
+import Link from "next/link";
+import { getArticleBySlug, getAllArticleSlugs, getRelatedArticles } from "@/sanity/client";
 import { urlFor } from "@/sanity/image";
 import { PortableTextRenderer } from "@/components/PortableTextRenderer";
 import { ShareSidebar } from "@/components/ShareSidebar";
+import { AuthorBio } from "@/components/AuthorBio";
+import { RelatedArticles } from "@/components/RelatedArticles";
 import { formatDate } from "@/lib/utils";
 
 export async function generateStaticParams() {
@@ -44,6 +47,10 @@ export default async function ArticlePage({
 
   if (!article) notFound();
 
+  const relatedArticles = article.category
+    ? await getRelatedArticles(article.category.slug, article._id)
+    : [];
+
   return (
     <article className="max-w-[1400px] mx-auto px-8 py-24">
       {/* Header */}
@@ -65,7 +72,17 @@ export default async function ArticlePage({
         ) : null}
 
         <div className="font-sans text-sm text-meta space-x-4">
-          {article.author ? <span>Yazan: {article.author.name}</span> : null}
+          {article.author ? (
+            <span>
+              Yazan:{" "}
+              <Link
+                href={`/yazarlar/${article.author.slug}`}
+                className="hover:text-action transition-colors duration-300"
+              >
+                {article.author.name}
+              </Link>
+            </span>
+          ) : null}
           {article.publishedAt ? (
             <span>{formatDate(article.publishedAt)}</span>
           ) : null}
@@ -116,8 +133,14 @@ export default async function ArticlePage({
               </div>
             </div>
           ) : null}
+
+          {/* Author Bio */}
+          <AuthorBio author={article.author} />
         </div>
       </div>
+
+      {/* Related Articles */}
+      <RelatedArticles articles={relatedArticles} />
     </article>
   );
 }
