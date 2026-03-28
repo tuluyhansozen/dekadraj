@@ -111,6 +111,13 @@ export const getAllAuthorSlugs = cache(async () => {
   return client.fetch(`*[_type == "author"]{ "slug": slug.current }`);
 });
 
+export const getAllAuthors = cache(async () => {
+  if (!client) return [];
+  return client.fetch(
+    `*[_type == "author"] | order(name asc){ name, "slug": slug.current, bio, photo }`
+  );
+});
+
 export const getSiteSettings = cache(async () => {
   if (!client) return null;
   return client.fetch(
