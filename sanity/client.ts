@@ -119,12 +119,28 @@ export const getAllAuthors = cache(async () => {
 });
 
 export const getRelatedArticles = cache(
-  async (categorySlug: string, excludeId: string) => {
+  async (categorySlug: string | null, excludeId: string) => {
     if (!client) return [];
-    return client.fetch(
-      `*[_type == "article" && category->slug.current == $categorySlug && _id != $excludeId] | order(publishedAt desc)[0...3]{ ${articleFields} }`,
-      { categorySlug, excludeId }
-    );
+
+    // First try same category
+    let articles = categorySlug
+      ? await client.fetch(
+          `*[_type == "article" && category->slug.current == $categorySlug && _id != $excludeId] | order(publishedAt desc)[0...3]{ ${articleFields} }`,
+          { categorySlug, excludeId }
+        )
+      : [];
+
+    // Fill remaining slots with recent articles
+    if (articles.length < 3) {
+      const existingIds = [excludeId, ...articles.map((a: { _id: string }) => a._id)];
+      const filler = await client.fetch(
+        `*[_type == "article" && !(_id in $existingIds)] | order(publishedAt desc)[0...${3 - articles.length}]{ ${articleFields} }`,
+        { existingIds }
+      );
+      articles = [...articles, ...filler];
+    }
+
+    return articles;
   }
 );
 

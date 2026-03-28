@@ -47,9 +47,10 @@ export default async function ArticlePage({
 
   if (!article) notFound();
 
-  const relatedArticles = article.category
-    ? await getRelatedArticles(article.category.slug, article._id)
-    : [];
+  const relatedArticles = await getRelatedArticles(
+    article.category?.slug ?? null,
+    article._id
+  );
 
   return (
     <article className="max-w-[1400px] mx-auto px-8 py-24">
