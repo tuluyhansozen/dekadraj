@@ -6,11 +6,11 @@ export const metadata = {
 export default function HakkimizdaPage() {
   return (
     <section className="max-w-[1400px] mx-auto px-8 py-24">
-      <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-ink mb-12">
+      <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-ink mb-12 text-center">
         Manifesto
       </h1>
 
-      <div className="max-w-3xl space-y-6 font-sans text-lg leading-relaxed text-ink/90">
+      <div className="max-w-3xl mx-auto space-y-6 font-sans text-lg leading-relaxed text-ink/90">
         <p>
           Bugün Türkiye'de ve dünyada politika, ekonomi, kültür ve sinema
           alanlarında egemen düzenin; gençler, kadınlar, işçiler, queerler ve
