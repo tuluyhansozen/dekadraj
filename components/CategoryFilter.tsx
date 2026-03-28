@@ -18,14 +18,14 @@ export function CategoryFilter({ categories }: CategoryFilterProps) {
     } else {
       params.delete("category");
     }
-    router.push(`/yazilar?${params.toString()}`);
+    router.replace(`/yazilar?${params.toString()}`);
   };
 
   return (
     <div className="flex flex-wrap gap-3 mb-8">
       <button
         onClick={() => handleFilter(null)}
-        className={`font-sans text-[9px] font-bold uppercase tracking-wider border px-3 py-2 transition-all duration-300 ${
+        className={`font-sans text-[11px] font-bold uppercase tracking-wider border px-3 py-2 transition-colors duration-300 ${
           !activeCategory
             ? "bg-action text-canvas border-action"
             : "text-meta border-meta hover:border-action hover:text-action"
@@ -37,7 +37,7 @@ export function CategoryFilter({ categories }: CategoryFilterProps) {
         <button
           key={cat.slug}
           onClick={() => handleFilter(cat.slug)}
-          className={`font-sans text-[9px] font-bold uppercase tracking-wider border px-3 py-2 transition-all duration-300 ${
+          className={`font-sans text-[11px] font-bold uppercase tracking-wider border px-3 py-2 transition-colors duration-300 ${
             activeCategory === cat.slug
               ? "bg-action text-canvas border-action"
               : "text-meta border-meta hover:border-action hover:text-action"

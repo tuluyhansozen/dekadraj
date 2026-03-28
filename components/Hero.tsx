@@ -3,12 +3,12 @@ export function Hero() {
     <section className="min-h-screen flex items-center justify-center px-8 pt-32 pb-24">
       <div className="max-w-[1100px] mx-auto text-center space-y-8">
         {/* Main Logo */}
-        <h1 className="font-serif text-7xl lg:text-8xl font-bold text-action mb-6 tracking-tight">
+        <h1 className="font-serif text-4xl md:text-6xl lg:text-8xl font-bold text-action mb-6 tracking-tight">
           dekadraj
         </h1>
 
         {/* Subtitle */}
-        <p className="font-serif italic text-2xl lg:text-3xl text-ink leading-relaxed max-w-[800px] mx-auto">
+        <p className="font-serif italic text-xl md:text-2xl lg:text-3xl text-ink leading-relaxed max-w-[800px] mx-auto">
           Politik minimalizm, entelektüel doku ve sinematik direniş. Kadrın
           dışına çıkanların dijital mecmuası.
         </p>
@@ -34,6 +34,8 @@ export function Hero() {
             strokeLinecap="square"
             strokeLinejoin="miter"
             className="mx-auto"
+            aria-hidden="true"
+            role="presentation"
           >
             <line x1="12" y1="5" x2="12" y2="19" />
             <polyline points="19 12 12 19 5 12" />

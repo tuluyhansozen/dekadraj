@@ -54,14 +54,15 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="name" className="font-sans text-[10px] font-bold uppercase tracking-wider text-meta block mb-2">
+        <label htmlFor="name" className="font-sans text-xs font-bold uppercase tracking-wider text-meta block mb-2">
           İsim
         </label>
         <input
           id="name"
           type="text"
+          autoComplete="name"
           {...register("name")}
-          className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-base text-ink focus:outline-none focus:border-action transition-colors"
+          className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-base text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/30 focus:border-action transition-colors"
         />
         {errors.name ? (
           <p className="font-sans text-sm text-action mt-1">{errors.name.message}</p>
@@ -69,14 +70,16 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="email" className="font-sans text-[10px] font-bold uppercase tracking-wider text-meta block mb-2">
+        <label htmlFor="email" className="font-sans text-xs font-bold uppercase tracking-wider text-meta block mb-2">
           E-posta
         </label>
         <input
           id="email"
           type="email"
+          autoComplete="email"
+          spellCheck={false}
           {...register("email")}
-          className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-base text-ink focus:outline-none focus:border-action transition-colors"
+          className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-base text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/30 focus:border-action transition-colors"
         />
         {errors.email ? (
           <p className="font-sans text-sm text-action mt-1">{errors.email.message}</p>
@@ -84,14 +87,14 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="font-sans text-[10px] font-bold uppercase tracking-wider text-meta block mb-2">
+        <label htmlFor="message" className="font-sans text-xs font-bold uppercase tracking-wider text-meta block mb-2">
           Mesaj
         </label>
         <textarea
           id="message"
           rows={6}
           {...register("message")}
-          className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-base text-ink focus:outline-none focus:border-action transition-colors resize-none"
+          className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-base text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/30 focus:border-action transition-colors resize-none"
         />
         {errors.message ? (
           <p className="font-sans text-sm text-action mt-1">{errors.message.message}</p>
@@ -101,21 +104,23 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="font-sans text-[10px] font-bold uppercase tracking-wider bg-action text-canvas px-8 py-3 hover:bg-ink transition-colors duration-300 disabled:opacity-50"
+        className="font-sans text-xs font-bold uppercase tracking-wider bg-action text-canvas px-8 py-3 hover:bg-ink transition-colors duration-300 disabled:opacity-50"
       >
-        {status === "loading" ? "Gönderiliyor..." : "Gönder"}
+        {status === "loading" ? "Gönderiliyor…" : "Gönder"}
       </button>
 
-      {status === "success" ? (
-        <p className="font-sans text-sm text-action">
-          Mesajınız başarıyla gönderildi. Teşekkürler!
-        </p>
-      ) : null}
-      {status === "error" ? (
-        <p className="font-sans text-sm text-action">
-          Bir hata oluştu. Lütfen tekrar deneyin.
-        </p>
-      ) : null}
+      <div aria-live="polite" aria-atomic="true">
+        {status === "success" ? (
+          <p className="font-sans text-sm text-action">
+            Mesajınız başarıyla gönderildi. Teşekkürler!
+          </p>
+        ) : null}
+        {status === "error" ? (
+          <p className="font-sans text-sm text-action">
+            Bir hata oluştu. Lütfen tekrar deneyin.
+          </p>
+        ) : null}
+      </div>
     </form>
   );
 }

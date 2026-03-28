@@ -49,7 +49,7 @@ export default async function ArticlePage({
       {/* Header */}
       <header className="max-w-[800px] mx-auto text-center mb-16 space-y-6">
         {article.category ? (
-          <p className="font-sans text-[10px] font-bold text-action uppercase tracking-wider">
+          <p className="font-sans text-xs font-bold text-action uppercase tracking-wider">
             {article.category.title}
           </p>
         ) : null}
@@ -107,7 +107,7 @@ export default async function ArticlePage({
                   (topic: { title: string; slug: string }) => (
                     <span
                       key={topic.slug}
-                      className="font-sans text-[9px] font-bold uppercase tracking-wider text-meta border border-meta px-3 py-2"
+                      className="font-sans text-[11px] font-bold uppercase tracking-wider text-meta border border-meta px-3 py-2"
                     >
                       {topic.title}
                     </span>

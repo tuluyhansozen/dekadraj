@@ -39,7 +39,7 @@ export function FeaturedEssay({ article }: FeaturedEssayProps) {
           {/* Typography Section - 40% */}
           <div className="lg:col-span-2 space-y-6">
             {article.category ? (
-              <p className="font-sans text-[10px] font-bold text-action uppercase tracking-wider">
+              <p className="font-sans text-xs font-bold text-action uppercase tracking-wider">
                 {article.category.title}
               </p>
             ) : null}

@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     locale: "tr_TR",
     siteName: "Dekadraj",
   },
+  other: {
+    "theme-color": "#F4F1E8",
+  },
 };
 
 export default function RootLayout({
@@ -41,9 +44,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className={`${playfair.variable} ${inter.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://cdn.sanity.io" />
+      </head>
       <body className="min-h-screen">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:bg-action focus:text-canvas focus:px-4 focus:py-2 focus:font-sans focus:text-sm focus:uppercase focus:tracking-wider"
+        >
+          İçeriğe Geç
+        </a>
         <Header />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
       </body>
     </html>

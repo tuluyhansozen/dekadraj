@@ -48,7 +48,7 @@ export function NewsletterForm({ variant = "footer" }: NewsletterFormProps) {
               footerForm?.scrollIntoView({ behavior: "smooth" });
               footerForm?.focus();
             }}
-            className="font-sans text-sm text-canvas border border-canvas px-8 py-3 uppercase tracking-wider hover:bg-canvas hover:text-action transition-all duration-300"
+            className="font-sans text-sm text-canvas border border-canvas px-8 py-3 uppercase tracking-wider hover:bg-canvas hover:text-action transition-colors duration-300"
           >
             Abone Ol
           </button>
@@ -59,27 +59,37 @@ export function NewsletterForm({ variant = "footer" }: NewsletterFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
+      <label htmlFor="newsletter-email" className="sr-only">
+        E-posta adresiniz
+      </label>
       <input
+        id="newsletter-email"
         type="email"
+        name="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="E-posta adresiniz"
-        className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-sm text-ink placeholder:text-meta focus:outline-none focus:border-action transition-colors"
+        placeholder="E-posta adresiniz…"
+        autoComplete="email"
+        spellCheck={false}
+        className="w-full bg-transparent border-b-2 border-ink pb-2 font-sans text-sm text-ink placeholder:text-meta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/30 focus:border-action transition-colors"
         required
       />
-      {status === "success" ? (
-        <p className="font-sans text-xs text-action">Abone oldunuz!</p>
-      ) : status === "error" ? (
-        <p className="font-sans text-xs text-action">Bir hata oluştu. Tekrar deneyin.</p>
-      ) : (
+      <div aria-live="polite" aria-atomic="true">
+        {status === "success" ? (
+          <p className="font-sans text-xs text-action">Abone oldunuz!</p>
+        ) : status === "error" ? (
+          <p className="font-sans text-xs text-action">Bir hata oluştu. Tekrar deneyin.</p>
+        ) : null}
+      </div>
+      {status !== "success" && status !== "error" ? (
         <button
           type="submit"
           disabled={status === "loading"}
           className="font-sans text-xs font-bold text-ink hover:text-action transition-colors duration-300 uppercase tracking-wider disabled:opacity-50"
         >
-          {status === "loading" ? "Gönderiliyor..." : "Abone Ol →"}
+          {status === "loading" ? "Gönderiliyor…" : "Abone Ol →"}
         </button>
-      )}
+      ) : null}
     </form>
   );
 }

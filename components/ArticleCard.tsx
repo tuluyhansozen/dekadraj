@@ -37,7 +37,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 
         {/* Category */}
         {article.category ? (
-          <p className="font-sans text-[10px] font-bold text-action uppercase tracking-wider mb-3">
+          <p className="font-sans text-xs font-bold text-action uppercase tracking-wider mb-3">
             {article.category.title}
           </p>
         ) : null}
@@ -61,7 +61,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
           {article.topics.map((topic) => (
             <span
               key={topic.slug}
-              className="font-sans text-[9px] font-bold text-meta uppercase tracking-wider border border-meta px-2 py-1 hover:border-action hover:text-action transition-colors duration-300"
+              className="font-sans text-[11px] font-bold text-meta uppercase tracking-wider border border-meta px-2 py-1 hover:border-action hover:text-action transition-colors duration-300"
             >
               {topic.title}
             </span>
@@ -72,7 +72,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
       {/* Meta */}
       <p className="font-sans text-sm text-meta">
         {article.author?.name}
-        {article.author?.name && article.publishedAt ? " • " : ""}
+        {article.author?.name && article.publishedAt ? " \u2022 " : ""}
         {article.publishedAt ? formatDate(article.publishedAt) : ""}
       </p>
     </article>

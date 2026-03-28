@@ -134,7 +134,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-ink/20 pt-8">
-          <p className="font-sans text-[10px] text-meta text-center">
+          <p className="font-sans text-xs text-meta text-center">
             © {new Date().getFullYear()} Dekadraj. Tüm hakları saklıdır. Sinema
             bir direniş biçimidir.
           </p>

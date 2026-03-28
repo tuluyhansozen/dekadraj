@@ -18,21 +18,27 @@ export function TopicDropdown({ topics }: TopicDropdownProps) {
     } else {
       params.delete("topic");
     }
-    router.push(`/yazilar?${params.toString()}`);
+    router.replace(`/yazilar?${params.toString()}`);
   };
 
   return (
-    <select
-      value={activeTopic || ""}
-      onChange={handleChange}
-      className="bg-transparent border-b-2 border-ink pb-2 font-sans text-sm text-ink focus:outline-none focus:border-action transition-colors appearance-none cursor-pointer pr-8"
-    >
-      <option value="">Tüm Konular</option>
-      {topics.map((topic) => (
-        <option key={topic.slug} value={topic.slug}>
-          {topic.title}
-        </option>
-      ))}
-    </select>
+    <div>
+      <label htmlFor="topic-filter" className="sr-only">
+        Konu seçin
+      </label>
+      <select
+        id="topic-filter"
+        value={activeTopic || ""}
+        onChange={handleChange}
+        className="bg-transparent border-b-2 border-ink pb-2 font-sans text-sm text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/30 focus:border-action transition-colors appearance-none cursor-pointer pr-8"
+      >
+        <option value="">Tüm Konular</option>
+        {topics.map((topic) => (
+          <option key={topic.slug} value={topic.slug}>
+            {topic.title}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }
