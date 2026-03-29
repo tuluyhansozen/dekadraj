@@ -10,7 +10,7 @@ export function Footer() {
           <div>
             <Link
               href="/"
-              className="font-serif text-3xl font-semibold text-action mb-4 block"
+              className="font-sans text-[20px] font-bold text-action tracking-[-0.5px] mb-4 block"
             >
               dekadraj
             </Link>
@@ -137,7 +137,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-ink/20 pt-8">
-          <p className="font-sans text-xs text-meta text-center">
+          <p className="font-sans text-xs text-meta text-center uppercase tracking-wider">
             © {new Date().getFullYear()} Dekadraj. Tüm hakları saklıdır. Sinema
             bir direniş biçimidir.
           </p>

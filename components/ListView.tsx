@@ -22,14 +22,14 @@ export function ListView({ articles }: ListViewProps) {
             <article className="group border-b border-ink py-6 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 items-center hover:bg-footer transition-colors duration-300 px-4 cursor-pointer">
               {/* Date */}
               <div className="md:col-span-2">
-                <p className="font-mono text-xs text-meta uppercase tracking-wider tabular-nums">
+                <p className="font-mono text-[13px] font-medium text-meta uppercase tracking-[0.26px] tabular-nums">
                   {formatDateShort(article.publishedAt)}
                 </p>
               </div>
 
               {/* Title */}
               <div className="md:col-span-7">
-                <h4 className="font-serif text-xl font-semibold text-ink group-hover:text-action transition-colors duration-300">
+                <h4 className="font-serif text-[22px] font-medium text-ink tracking-[-0.44px] group-hover:text-action transition-colors duration-300">
                   {article.title}
                 </h4>
               </div>

@@ -107,7 +107,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="font-sans text-xs font-bold uppercase tracking-wider bg-action text-canvas px-8 py-3 hover:bg-ink transition-colors duration-300 disabled:opacity-50"
+        className="font-sans text-[11px] font-bold uppercase tracking-[1px] bg-action text-canvas px-7 py-3.5 hover:bg-ink transition-colors duration-300 disabled:opacity-50"
       >
         {status === "loading" ? "Gönderiliyor…" : "Gönder"}
       </button>

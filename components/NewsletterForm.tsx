@@ -48,7 +48,7 @@ export function NewsletterForm({ variant = "footer" }: NewsletterFormProps) {
               footerForm?.scrollIntoView({ behavior: "smooth" });
               footerForm?.focus();
             }}
-            className="font-sans text-sm text-canvas border border-canvas px-8 py-3 uppercase tracking-wider hover:bg-canvas hover:text-action transition-colors duration-300"
+            className="font-sans text-[11px] font-bold text-canvas border border-canvas px-7 py-3.5 uppercase tracking-[1px] hover:bg-canvas hover:text-action transition-colors duration-300"
           >
             Abone Ol
           </button>

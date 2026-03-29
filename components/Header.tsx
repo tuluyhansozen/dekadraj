@@ -70,7 +70,7 @@ export function Header() {
         <div className="max-w-[1400px] mx-auto px-8 h-full flex items-center justify-between">
           <Link
             href="/"
-            className={`font-serif text-2xl font-semibold transition-opacity ${
+            className={`font-sans text-[20px] font-bold tracking-[-0.5px] transition-opacity ${
               isActive("/") ? "text-action" : "text-action hover:opacity-80"
             }`}
           >
@@ -83,9 +83,9 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`font-sans text-sm transition-colors duration-300 ${
+                className={`font-sans text-[14px] font-medium tracking-[0.28px] transition-colors duration-300 ${
                   isActive(link.href)
-                    ? "text-action font-semibold"
+                    ? "text-action"
                     : "text-ink hover:text-action"
                 }`}
                 aria-current={isActive(link.href) ? "page" : undefined}
@@ -94,6 +94,75 @@ export function Header() {
               </Link>
             ))}
           </nav>
+
+          {/* Separator + Social Icons (desktop only) */}
+          <span className="hidden lg:block w-px h-5 bg-ink/20 ml-2" aria-hidden="true" />
+          <div className="hidden lg:flex items-center gap-4 ml-2">
+            <a
+              href="#"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ink hover:text-action transition-colors duration-300"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+            <a
+              href="#"
+              aria-label="X (Twitter)"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ink hover:text-action transition-colors duration-300"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+              </svg>
+            </a>
+            <a
+              href="#"
+              aria-label="Letterboxd"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ink hover:text-action transition-colors duration-300"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <circle cx="8" cy="12" r="6" opacity="0.5" />
+                <circle cx="16" cy="12" r="6" opacity="0.5" />
+                <path d="M12 18a6 6 0 0 0 4-1.5 6 6 0 0 0-8 0 6 6 0 0 0 4 1.5z" />
+              </svg>
+            </a>
+          </div>
 
           {/* Mobile Hamburger */}
           <button

@@ -44,7 +44,7 @@ export function FeaturedEssay({ article }: FeaturedEssayProps) {
               </p>
             ) : null}
 
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-ink leading-[1.1] group-hover:text-action transition-colors duration-300">
+            <h2 className="font-serif text-3xl md:text-[48px] lg:text-[60px] font-medium text-ink leading-[1.1] tracking-[-1.2px] group-hover:text-action transition-colors duration-300">
               {article.title}
             </h2>
 

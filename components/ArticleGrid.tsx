@@ -30,7 +30,7 @@ export function ArticleGrid({ articles }: ArticleGridProps) {
       <div className="flex justify-center mt-16">
         <Link
           href="/yazilar"
-          className="font-sans text-sm text-ink border-2 border-ink px-12 py-4 uppercase tracking-wider hover:bg-ink hover:text-canvas transition-colors duration-300"
+          className="font-sans text-[11px] font-bold text-ink border-2 border-ink px-7 py-3.5 uppercase tracking-[1px] hover:bg-ink hover:text-canvas transition-colors duration-300"
         >
           Daha Fazlası →
         </Link>
