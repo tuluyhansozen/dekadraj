@@ -77,27 +77,28 @@ export function Header() {
             dekadraj
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8" aria-label="Ana menü">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`font-sans text-[14px] font-medium tracking-[0.28px] transition-colors duration-300 ${
-                  isActive(link.href)
-                    ? "text-action"
-                    : "text-ink hover:text-action"
-                }`}
-                aria-current={isActive(link.href) ? "page" : undefined}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          {/* Desktop Navigation + Social Icons (grouped right) */}
+          <div className="hidden lg:flex items-center gap-8">
+            <nav className="flex items-center gap-8" aria-label="Ana menü">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`font-sans text-[14px] font-medium tracking-[0.28px] transition-colors duration-300 ${
+                    isActive(link.href)
+                      ? "text-action"
+                      : "text-ink hover:text-action"
+                  }`}
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
 
-          {/* Separator + Social Icons (desktop only) */}
-          <span className="hidden lg:block w-px h-5 bg-ink/20 ml-2" aria-hidden="true" />
-          <div className="hidden lg:flex items-center gap-4 ml-2">
+            <span className="w-px h-5 bg-ink/20" aria-hidden="true" />
+
+            <div className="flex items-center gap-4">
             <a
               href="#"
               aria-label="Instagram"
@@ -162,6 +163,7 @@ export function Header() {
                 <path d="M12 18a6 6 0 0 0 4-1.5 6 6 0 0 0-8 0 6 6 0 0 0 4 1.5z" />
               </svg>
             </a>
+            </div>
           </div>
 
           {/* Mobile Hamburger */}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/image";
+import { stripQuotes } from "@/lib/utils";
 
 interface FeaturedEssayProps {
   article: {
@@ -49,8 +50,8 @@ export function FeaturedEssay({ article }: FeaturedEssayProps) {
             </h2>
 
             {article.excerpt ? (
-              <p className="font-serif italic text-lg text-ink leading-relaxed opacity-80">
-                {article.excerpt}
+              <p className="font-serif italic text-lg text-ink leading-relaxed opacity-[0.85]">
+                {stripQuotes(article.excerpt)}
               </p>
             ) : null}
 

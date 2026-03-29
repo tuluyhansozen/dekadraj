@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/image";
-import { formatDate } from "@/lib/utils";
+import { formatDate, stripQuotes } from "@/lib/utils";
 
 interface ArticleCardProps {
   article: {
@@ -51,7 +51,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
         {/* Excerpt */}
         {article.excerpt ? (
           <p className="font-sans text-sm text-ink leading-relaxed mb-4 opacity-80">
-            {article.excerpt}
+            {stripQuotes(article.excerpt)}
           </p>
         ) : null}
       </Link>
