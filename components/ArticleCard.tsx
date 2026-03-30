@@ -35,14 +35,19 @@ export function ArticleCard({ article }: ArticleCardProps) {
         ) : (
           <div className="w-full aspect-[3/2] bg-secondary mb-4" />
         )}
+      </Link>
 
-        {/* Category */}
-        {article.category ? (
-          <p className="font-sans text-xs font-bold text-action uppercase tracking-wider mb-3">
-            {article.category.title}
-          </p>
-        ) : null}
+      {/* Category */}
+      {article.category ? (
+        <Link
+          href={`/yazilar?category=${article.category.slug}`}
+          className="font-sans text-xs font-bold text-action uppercase tracking-wider mb-3 block hover:opacity-70 transition-opacity duration-300"
+        >
+          {article.category.title}
+        </Link>
+      ) : null}
 
+      <Link href={`/yazilar/${article.slug}`}>
         {/* Title */}
         <h3 className="font-serif text-[24px] font-medium text-ink leading-[1.2] tracking-[-0.48px] mb-3 group-hover:text-action transition-colors duration-300">
           {article.title}
@@ -60,19 +65,27 @@ export function ArticleCard({ article }: ArticleCardProps) {
       {article.topics && article.topics.length > 0 ? (
         <div className="flex flex-wrap gap-2 mb-4">
           {article.topics.map((topic) => (
-            <span
+            <Link
               key={topic.slug}
+              href={`/yazilar?topic=${topic.slug}`}
               className="font-sans text-xs font-bold text-meta uppercase tracking-wider border border-meta px-2 py-1 hover:border-action hover:text-action transition-colors duration-300"
             >
               {topic.title}
-            </span>
+            </Link>
           ))}
         </div>
       ) : null}
 
       {/* Meta */}
       <p className="font-sans text-sm text-meta">
-        {article.author?.name}
+        {article.author ? (
+          <Link
+            href={`/yazarlar/${article.author.slug}`}
+            className="hover:text-action transition-colors duration-300"
+          >
+            {article.author.name}
+          </Link>
+        ) : null}
         {article.author?.name && article.publishedAt ? " \u2022 " : ""}
         {article.publishedAt ? formatDate(article.publishedAt) : ""}
       </p>

@@ -19,14 +19,17 @@ interface Author {
   slug: string;
   bio?: string;
   photo?: { asset: { _ref: string } };
+  role?: string;
 }
 
 function AuthorCard({
   author,
   isEditor,
+  isGuest,
 }: {
   author: Author;
   isEditor: boolean;
+  isGuest: boolean;
 }) {
   return (
     <Link
@@ -51,10 +54,15 @@ function AuthorCard({
           </div>
         )}
 
-        {/* Editorial board badge */}
+        {/* Role badge */}
         {isEditor && (
           <span className="absolute top-0 left-0 bg-action text-canvas font-sans text-xs font-medium tracking-wider uppercase px-3 py-1.5">
             Yayın Kurulu
+          </span>
+        )}
+        {isGuest && (
+          <span className="absolute top-0 left-0 bg-ink text-canvas font-sans text-xs font-medium tracking-wider uppercase px-3 py-1.5">
+            Konuk Yazar
           </span>
         )}
       </div>
@@ -77,12 +85,21 @@ function AuthorCard({
 export default async function HakkimizdaPage() {
   const allAuthors: Author[] = await getAllAuthors();
 
-  // Separate editorial board and other writers
-  const editors = allAuthors.filter((a) =>
-    EDITORIAL_BOARD.includes(a.name)
+  // Separate editorial board, regular writers, and guest writers
+  const editors = allAuthors.filter(
+    (a) => EDITORIAL_BOARD.includes(a.name) || a.role === "yayin-kurulu"
+  );
+  const guestWriters = allAuthors.filter(
+    (a) =>
+      !EDITORIAL_BOARD.includes(a.name) &&
+      a.role !== "yayin-kurulu" &&
+      a.role === "konuk-yazar"
   );
   const writers = allAuthors.filter(
-    (a) => !EDITORIAL_BOARD.includes(a.name)
+    (a) =>
+      !EDITORIAL_BOARD.includes(a.name) &&
+      a.role !== "yayin-kurulu" &&
+      a.role !== "konuk-yazar"
   );
 
   return (
@@ -144,6 +161,19 @@ export default async function HakkimizdaPage() {
             biçim arayışındaki sinemacıların sözünü çoğaltmak için buradayız.
           </p>
         </div>
+
+        {/* Quote */}
+        <blockquote className="max-w-3xl mx-auto mt-16 pt-12 border-t border-action">
+          <p className="font-serif italic text-2xl md:text-3xl text-ink leading-snug text-center">
+            &ldquo;Konformist olmak istemeyen, dünyaya yepyeni bir bakış açısı,
+            yeni bir anlatım, yeni bir biçim getirmek isteyen sinemacı&hellip;&rdquo;
+          </p>
+          <footer className="mt-6 text-center">
+            <cite className="font-sans text-sm font-bold text-action uppercase tracking-wider not-italic">
+              — Onat Kutlar
+            </cite>
+          </footer>
+        </blockquote>
       </section>
 
       {/* Separator */}
@@ -168,6 +198,7 @@ export default async function HakkimizdaPage() {
                 key={author.slug}
                 author={author}
                 isEditor={true}
+                isGuest={false}
               />
             ))}
           </div>
@@ -190,6 +221,30 @@ export default async function HakkimizdaPage() {
                 key={author.slug}
                 author={author}
                 isEditor={false}
+                isGuest={false}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Guest Writers */}
+      {guestWriters.length > 0 && (
+        <section className="max-w-[1400px] mx-auto px-8 py-24">
+          <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-ink mb-4">
+            Konuk Yazarlar
+          </h2>
+          <p className="font-sans text-meta mb-12 max-w-2xl">
+            Dekadraj'a katkı sunan konuk yazarlarımız.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+            {guestWriters.map((author) => (
+              <AuthorCard
+                key={author.slug}
+                author={author}
+                isEditor={false}
+                isGuest={true}
               />
             ))}
           </div>

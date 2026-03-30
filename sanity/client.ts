@@ -63,16 +63,39 @@ export const getAllArticleSlugs = cache(async () => {
 });
 
 export const getArticlesByCategory = cache(
-  async (categorySlug: string | null, topicSlug: string | null) => {
-    if (!client) return [];
+  async (
+    categorySlug: string | null,
+    topicSlug: string | null,
+    search: string | null = null,
+    page: number = 1,
+    pageSize: number = 18
+  ) => {
+    if (!client) return { articles: [], total: 0 };
     const filters = ['_type == "article"'];
     if (categorySlug) filters.push(`category->slug.current == $categorySlug`);
     if (topicSlug) filters.push(`$topicSlug in topics[]->slug.current`);
+    if (search) {
+      filters.push(
+        `(title match $search || excerpt match $search || pt::text(body) match $search)`
+      );
+    }
 
-    return client.fetch(
-      `*[${filters.join(" && ")}] | order(publishedAt desc){ ${articleFields} }`,
-      { categorySlug, topicSlug }
-    );
+    const filterStr = filters.join(" && ");
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize;
+
+    const [articles, total] = await Promise.all([
+      client.fetch(
+        `*[${filterStr}] | order(publishedAt desc)[${start}...${end}]{ ${articleFields} }`,
+        { categorySlug, topicSlug, search: search ? `${search}*` : null }
+      ),
+      client.fetch(
+        `count(*[${filterStr}])`,
+        { categorySlug, topicSlug, search: search ? `${search}*` : null }
+      ),
+    ]);
+
+    return { articles, total };
   }
 );
 
@@ -114,7 +137,7 @@ export const getAllAuthorSlugs = cache(async () => {
 export const getAllAuthors = cache(async () => {
   if (!client) return [];
   return client.fetch(
-    `*[_type == "author"] | order(name asc){ name, "slug": slug.current, bio, photo }`
+    `*[_type == "author"] | order(name asc){ name, "slug": slug.current, bio, photo, role }`
   );
 });
 

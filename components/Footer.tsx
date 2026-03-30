@@ -60,7 +60,7 @@ export function Footer() {
             </h4>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.instagram.com/dekadrajsinema/"
                 className="text-action hover:opacity-70 transition-opacity duration-300"
                 aria-label="Instagram"
                 target="_blank"
@@ -83,29 +83,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                href="#"
-                className="text-action hover:opacity-70 transition-opacity duration-300"
-                aria-label="X (Twitter)"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
-                  <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
-                </svg>
-              </a>
-              <a
-                href="#"
+                href="https://letterboxd.com/dekadrajsinema/"
                 className="text-action hover:opacity-70 transition-opacity duration-300"
                 aria-label="Letterboxd"
                 target="_blank"
@@ -139,7 +117,7 @@ export function Footer() {
         <div className="border-t border-ink/20 pt-8">
           <p className="font-sans text-xs text-meta text-center uppercase tracking-wider">
             © {new Date().getFullYear()} Dekadraj. Tüm hakları saklıdır. Sinema
-            bir direniş biçimidir.
+            bir direniştir.
           </p>
         </div>
       </div>

@@ -7,6 +7,7 @@ import { PortableTextRenderer } from "@/components/PortableTextRenderer";
 import { ShareSidebar } from "@/components/ShareSidebar";
 import { AuthorBio } from "@/components/AuthorBio";
 import { RelatedArticles } from "@/components/RelatedArticles";
+import { BackToTop } from "@/components/BackToTop";
 import { formatDate } from "@/lib/utils";
 
 export async function generateStaticParams() {
@@ -57,9 +58,12 @@ export default async function ArticlePage({
       {/* Header */}
       <header className="max-w-[800px] mx-auto text-center mb-16 space-y-6">
         {article.category ? (
-          <p className="font-sans text-xs font-bold text-action uppercase tracking-wider">
+          <Link
+            href={`/yazilar?category=${article.category.slug}`}
+            className="font-sans text-xs font-bold text-action uppercase tracking-wider hover:opacity-70 transition-opacity duration-300"
+          >
             {article.category.title}
-          </p>
+          </Link>
         ) : null}
 
         <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-ink leading-[1.1]">
@@ -123,12 +127,13 @@ export default async function ArticlePage({
               <div className="flex flex-wrap gap-3">
                 {article.topics.map(
                   (topic: { title: string; slug: string }) => (
-                    <span
+                    <Link
                       key={topic.slug}
-                      className="font-sans text-xs font-bold uppercase tracking-wider text-meta border border-meta px-3 py-2"
+                      href={`/yazilar?topic=${topic.slug}`}
+                      className="font-sans text-xs font-bold uppercase tracking-wider text-meta border border-meta px-3 py-2 hover:border-action hover:text-action transition-colors duration-300"
                     >
                       {topic.title}
-                    </span>
+                    </Link>
                   )
                 )}
               </div>
@@ -147,6 +152,8 @@ export default async function ArticlePage({
 
       {/* Related Articles */}
       <RelatedArticles articles={relatedArticles} />
+
+      <BackToTop />
     </article>
   );
 }

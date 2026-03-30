@@ -29,6 +29,19 @@ export const author = defineType({
       type: "image",
       options: { hotspot: true },
     }),
+    defineField({
+      name: "role",
+      title: "Rol",
+      type: "string",
+      options: {
+        list: [
+          { title: "Yazar", value: "yazar" },
+          { title: "Yayın Kurulu", value: "yayin-kurulu" },
+          { title: "Konuk Yazar", value: "konuk-yazar" },
+        ],
+      },
+      initialValue: "yazar",
+    }),
   ],
   preview: {
     select: { title: "name", media: "photo" },
