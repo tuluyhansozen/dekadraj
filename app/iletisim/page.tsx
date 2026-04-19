@@ -30,10 +30,10 @@ export default function IletisimPage() {
         <div className="mb-12">
           <p className="font-sans text-sm text-meta mb-1">E-posta</p>
           <a
-            href="mailto:iletisim@dekadraj.com"
+            href="mailto:dekadrajsinema@gmail.com"
             className="font-sans text-lg text-ink hover:text-action transition-colors duration-300"
           >
-            iletisim@dekadraj.com
+            dekadrajsinema@gmail.com
           </a>
         </div>
 
@@ -42,11 +42,11 @@ export default function IletisimPage() {
         {/* Newsletter */}
         <div className="mt-16 pt-12 border-t border-meta/20">
           <h2 className="font-serif text-2xl font-semibold text-ink mb-3">
-            Haftalık Bülten
+            Aylık Bülten
           </h2>
           <p className="font-sans text-sm text-meta leading-relaxed mb-6">
-            Yeni yazılardan ve etkinliklerden haberdar olmak için bültenimize
-            abone olun.
+            Sinema haberlerinden, güncel gösterimlerden ve gündeme dair film
+            tavsiyelerinden haberdar olmak için bültenimize abone olun.
           </p>
           <NewsletterForm />
         </div>

@@ -7,15 +7,13 @@ import {
   getFeaturedArticle,
   getRecentArticles,
   getListArticles,
-  getSiteSettings,
 } from "@/sanity/client";
 
 export default async function HomePage() {
-  const [featured, articles, listArticles, settings] = await Promise.all([
+  const [featured, articles, listArticles] = await Promise.all([
     getFeaturedArticle(),
     getRecentArticles(6),
     getListArticles(5),
-    getSiteSettings(),
   ]);
 
   return (
@@ -32,8 +30,8 @@ export default async function HomePage() {
       <ArticleGrid articles={articles} />
 
       <ManifestoBreak
-        quote={settings?.manifestoQuote ?? "Sinema, saniyede 24 kare gerçektir."}
-        attribution={settings?.manifestoAttribution ?? "Jean-Luc Godard"}
+        quote="Konformist olmak istemeyen, dünyaya yepyeni bir bakış açısı, yeni bir anlatım, yeni bir biçim getirmek isteyen sinemacı…"
+        attribution="Onat Kutlar"
       />
 
       <ListView articles={listArticles} />

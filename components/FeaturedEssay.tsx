@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/image";
-import { stripQuotes } from "@/lib/utils";
+import { formatDate, stripQuotes } from "@/lib/utils";
 
 interface FeaturedEssayProps {
   article: {
     title: string;
     slug: string;
     excerpt?: string;
+    publishedAt?: string;
     coverImage?: { asset: { _ref: string }; alt?: string };
     category?: { title: string };
     author?: { name: string };
@@ -55,9 +56,11 @@ export function FeaturedEssay({ article }: FeaturedEssayProps) {
               </p>
             ) : null}
 
-            {article.author ? (
+            {article.author || article.publishedAt ? (
               <p className="font-sans text-sm text-meta">
-                Yazan: {article.author.name}
+                {article.author ? `Yazan: ${article.author.name}` : null}
+                {article.author && article.publishedAt ? " · " : null}
+                {article.publishedAt ? formatDate(article.publishedAt) : null}
               </p>
             ) : null}
           </div>

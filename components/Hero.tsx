@@ -9,16 +9,14 @@ export function Hero() {
 
         {/* Subtitle */}
         <p className="font-serif italic text-xl md:text-2xl lg:text-3xl text-ink leading-relaxed max-w-[800px] mx-auto">
-          Politik minimalizm, entelektüel doku ve sinematik direniş. Kadrın
-          dışına çıkanların dijital mecmuası.
+          Kadrajın dışına bakan sinema topluluğu.
         </p>
 
         {/* Manifesto Text */}
         <div className="pt-12 max-w-[700px] mx-auto">
           <p className="font-sans text-base text-ink leading-loose">
-            Sight & Sound&apos;un editoryal ciddiyeti, Altyazı&apos;nın
-            kültürel derinliği ve Othon&apos;un modernist estetiğini birleştiren
-            Dekadraj, sinemanın hafıza ve direniş aracı olduğuna inanır.
+            Konformizmi reddeden, yeni bir bakış, yeni bir anlatım ve yeni bir
+            biçim arayışındaki sinemacıların sözünü çoğaltmak için buradayız.
           </p>
         </div>
 

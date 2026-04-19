@@ -1,15 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { Resend } from "resend";
+import { rateLimit } from "@/lib/rate-limit";
 
 const schema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  message: z.string().min(10),
+  name: z.string().min(2).max(200),
+  email: z.string().email().max(320),
+  message: z.string().min(10).max(5000),
   honeypot: z.string().max(0), // spam protection
 });
 
+function escapeHtml(str: string) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function POST(req: NextRequest) {
+  const limit = rateLimit(req, { key: "contact", limit: 3, windowMs: 60_000 });
+  if (!limit.allowed) {
+    return NextResponse.json(
+      { error: "Çok fazla deneme. Lütfen biraz sonra tekrar deneyin." },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfterSec) } }
+    );
+  }
+
   const body = await req.json().catch(() => null);
   const parsed = schema.safeParse(body);
 
@@ -20,7 +38,7 @@ export async function POST(req: NextRequest) {
   const { name, email, message } = parsed.data;
 
   const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.CONTACT_EMAIL || "iletisim@dekadraj.com";
+  const toEmail = process.env.CONTACT_EMAIL || "dekadrajsinema@gmail.com";
 
   if (!apiKey) {
     console.warn("RESEND_API_KEY is not configured.");
@@ -36,10 +54,10 @@ export async function POST(req: NextRequest) {
     subject: `Yeni İletişim Mesajı — ${name}`,
     text: `İsim: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`,
     html: `
-      <p><strong>İsim:</strong> ${name}</p>
-      <p><strong>E-posta:</strong> <a href="mailto:${email}">${email}</a></p>
+      <p><strong>İsim:</strong> ${escapeHtml(name)}</p>
+      <p><strong>E-posta:</strong> <a href="mailto:${encodeURIComponent(email)}">${escapeHtml(email)}</a></p>
       <hr />
-      <p>${message.replace(/\n/g, "<br />")}</p>
+      <p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>
     `,
   });
 

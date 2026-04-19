@@ -137,7 +137,7 @@ export const getAllAuthorSlugs = cache(async () => {
 export const getAllAuthors = cache(async () => {
   if (!client) return [];
   return client.fetch(
-    `*[_type == "author"] | order(name asc){ name, "slug": slug.current, bio, photo, role }`
+    `*[_type == "author" && hidden != true] | order(name asc){ name, "slug": slug.current, bio, photo, role }`
   );
 });
 

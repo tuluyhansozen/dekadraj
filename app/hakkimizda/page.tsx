@@ -107,7 +107,7 @@ export default async function HakkimizdaPage() {
       {/* Manifesto */}
       <section className="max-w-[1400px] mx-auto px-8 py-24">
         <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-ink mb-12 text-center">
-          Manifesto
+          Dekadraj Sinema Kolektifi
         </h1>
 
         <div className="max-w-3xl mx-auto space-y-6 font-sans text-lg leading-relaxed text-ink/90">
@@ -162,65 +162,40 @@ export default async function HakkimizdaPage() {
           </p>
         </div>
 
-        {/* Quote */}
-        <blockquote className="max-w-3xl mx-auto mt-16 pt-12 border-t border-action">
-          <p className="font-serif italic text-2xl md:text-3xl text-ink leading-snug text-center">
-            &ldquo;Konformist olmak istemeyen, dünyaya yepyeni bir bakış açısı,
-            yeni bir anlatım, yeni bir biçim getirmek isteyen sinemacı&hellip;&rdquo;
-          </p>
-          <footer className="mt-6 text-center">
-            <cite className="font-sans text-sm font-bold text-action uppercase tracking-wider not-italic">
-              — Onat Kutlar
-            </cite>
-          </footer>
-        </blockquote>
       </section>
 
-      {/* Separator */}
-      <div className="max-w-[1400px] mx-auto px-8">
-        <div className="h-px bg-action" />
-      </div>
+      {/* Quote — red banner (mirrors home page ManifestoBreak) */}
+      <section className="w-full bg-action py-32">
+        <div className="max-w-[900px] mx-auto px-8 text-center">
+          <blockquote className="font-serif italic text-4xl lg:text-5xl text-canvas leading-[1.3] mb-6">
+            &ldquo;Konformist olmak istemeyen, dünyaya yepyeni bir bakış açısı,
+            yeni bir anlatım, yeni bir biçim getirmek isteyen sinemacı&hellip;&rdquo;
+          </blockquote>
+          <p className="font-sans text-sm text-canvas opacity-70 uppercase tracking-wider">
+            — Onat Kutlar
+          </p>
+        </div>
+      </section>
 
-      {/* Editorial Board */}
-      {editors.length > 0 && (
+      {/* Team (editors + writers combined) */}
+      {(editors.length > 0 || writers.length > 0) && (
         <section className="max-w-[1400px] mx-auto px-8 py-24">
           <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-ink mb-4">
-            Yayın Kurulu
+            Ekibimiz
           </h2>
           <p className="font-sans text-meta mb-12 max-w-2xl">
-            Dekadraj'ın editoryal yönelimini belirleyen ve içerik süreçlerini
-            yürüten kurul.
+            Kolektifin sesini oluşturan editörler ve yazarlar.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
-            {editors.map((author) => (
+            {[...editors, ...writers].map((author) => (
               <AuthorCard
                 key={author.slug}
                 author={author}
-                isEditor={true}
-                isGuest={false}
-              />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* All Writers */}
-      {writers.length > 0 && (
-        <section className="max-w-[1400px] mx-auto px-8 py-24">
-          <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-ink mb-4">
-            Yazarlar
-          </h2>
-          <p className="font-sans text-meta mb-12 max-w-2xl">
-            Kolektifin sesini oluşturan tüm yazarlarımız.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
-            {writers.map((author) => (
-              <AuthorCard
-                key={author.slug}
-                author={author}
-                isEditor={false}
+                isEditor={
+                  EDITORIAL_BOARD.includes(author.name) ||
+                  author.role === "yayin-kurulu"
+                }
                 isGuest={false}
               />
             ))}

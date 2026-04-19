@@ -1,11 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { rateLimit } from "@/lib/rate-limit";
 
 const schema = z.object({
-  email: z.string().email(),
+  email: z.string().email().max(320),
 });
 
 export async function POST(req: NextRequest) {
+  const limit = rateLimit(req, { key: "newsletter", limit: 5, windowMs: 60_000 });
+  if (!limit.allowed) {
+    return NextResponse.json(
+      { error: "Çok fazla deneme. Lütfen biraz sonra tekrar deneyin." },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfterSec) } }
+    );
+  }
+
   const body = await req.json().catch(() => null);
   const parsed = schema.safeParse(body);
 

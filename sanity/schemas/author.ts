@@ -42,6 +42,14 @@ export const author = defineType({
       },
       initialValue: "yazar",
     }),
+    defineField({
+      name: "hidden",
+      title: "Ekip listesinde gizle",
+      description:
+        "İşaretlenirse yazar, Ekibimiz listesinde görünmez (ör. Kolektif gibi temsilî yazarlar için).",
+      type: "boolean",
+      initialValue: false,
+    }),
   ],
   preview: {
     select: { title: "name", media: "photo" },

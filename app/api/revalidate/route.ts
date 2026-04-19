@@ -4,9 +4,12 @@ import { revalidatePath } from "next/cache";
 // Called by Sanity webhook to revalidate ISR cache.
 // Sanity sends: { _type: string, slug?: { current: string } }
 export async function POST(req: NextRequest) {
-  const secret = req.headers.get("x-webhook-secret");
+  const expected = process.env.SANITY_WEBHOOK_SECRET;
+  const provided = req.headers.get("x-webhook-secret");
 
-  if (secret !== process.env.SANITY_WEBHOOK_SECRET) {
+  // Fail closed: if the secret is not configured, reject all requests.
+  // Prevents bypass when both env and header are empty strings.
+  if (!expected || !provided || provided !== expected) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

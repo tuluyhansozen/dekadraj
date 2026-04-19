@@ -89,11 +89,11 @@ export function SubscriptionPopup() {
         </button>
 
         <h2 className="font-serif text-2xl font-semibold text-ink mb-3">
-          Haftalık Bülten
+          Aylık Bülten
         </h2>
         <p className="font-sans text-sm text-meta leading-relaxed mb-6">
-          Yeni yazılardan ve etkinliklerden haberdar olmak için bültenimize abone
-          olun.
+          Sinema haberlerinden, güncel gösterimlerden ve gündeme dair film
+          tavsiyelerinden haberdar olmak için bültenimize abone olun.
         </p>
 
         {status === "success" ? (
