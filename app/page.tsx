@@ -21,7 +21,7 @@ export default async function HomePage() {
       <Hero />
 
       {/* Separator */}
-      <div className="max-w-[1400px] mx-auto px-8">
+      <div id="content" className="max-w-[1400px] mx-auto px-8 scroll-mt-20">
         <div className="h-px bg-action" />
       </div>
 

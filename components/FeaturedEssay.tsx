@@ -10,62 +10,77 @@ interface FeaturedEssayProps {
     excerpt?: string;
     publishedAt?: string;
     coverImage?: { asset: { _ref: string }; alt?: string };
-    category?: { title: string };
-    author?: { name: string };
+    category?: { title: string; slug: string };
+    author?: { name: string; slug: string };
   } | null;
 }
 
 export function FeaturedEssay({ article }: FeaturedEssayProps) {
   if (!article) return null;
 
+  const articleHref = `/yazilar/${article.slug}`;
+
   return (
     <section className="max-w-[1400px] mx-auto px-8 py-24">
-      <Link href={`/yazilar/${article.slug}`}>
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center group">
-          {/* Image Section - 60% */}
-          <div className="lg:col-span-3 overflow-hidden">
-            {article.coverImage ? (
-              <Image
-                src={urlFor(article.coverImage).width(900).height(506).url()}
-                alt={article.coverImage.alt || article.title}
-                width={900}
-                height={506}
-                priority
-                className="w-full aspect-[16/9] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-            ) : (
-              <div className="w-full aspect-[16/9] bg-secondary" />
-            )}
-          </div>
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center group">
+        {/* Image Section - 60% */}
+        <Link href={articleHref} className="lg:col-span-3 overflow-hidden block">
+          {article.coverImage ? (
+            <Image
+              src={urlFor(article.coverImage).width(900).height(506).url()}
+              alt={article.coverImage.alt || article.title}
+              width={900}
+              height={506}
+              priority
+              className="w-full aspect-[16/9] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+          ) : (
+            <div className="w-full aspect-[16/9] bg-secondary" />
+          )}
+        </Link>
 
-          {/* Typography Section - 40% */}
-          <div className="lg:col-span-2 space-y-6">
-            {article.category ? (
-              <p className="font-sans text-xs font-bold text-action uppercase tracking-wider">
-                {article.category.title}
-              </p>
-            ) : null}
+        {/* Typography Section - 40% */}
+        <div className="lg:col-span-2 space-y-6">
+          {article.category ? (
+            <Link
+              href={`/yazilar?category=${article.category.slug}`}
+              className="font-sans text-xs font-bold text-action uppercase tracking-wider block hover:opacity-70 transition-opacity duration-300"
+            >
+              {article.category.title}
+            </Link>
+          ) : null}
 
+          <Link href={articleHref} className="block">
             <h2 className="font-serif text-3xl md:text-[48px] lg:text-[60px] font-medium text-ink leading-[1.1] tracking-[-1.2px] group-hover:text-action transition-colors duration-300">
               {article.title}
             </h2>
 
             {article.excerpt ? (
-              <p className="font-serif italic text-lg text-ink leading-relaxed opacity-[0.85]">
+              <p className="font-serif italic text-lg text-ink leading-relaxed opacity-[0.85] mt-6">
                 {stripQuotes(article.excerpt)}
               </p>
             ) : null}
+          </Link>
 
-            {article.author || article.publishedAt ? (
-              <p className="font-sans text-sm text-meta">
-                {article.author ? `Yazan: ${article.author.name}` : null}
-                {article.author && article.publishedAt ? " · " : null}
-                {article.publishedAt ? formatDate(article.publishedAt) : null}
-              </p>
-            ) : null}
-          </div>
+          {article.author || article.publishedAt ? (
+            <p className="font-sans text-sm text-meta">
+              {article.author ? (
+                <>
+                  Yazan:{" "}
+                  <Link
+                    href={`/yazarlar/${article.author.slug}`}
+                    className="hover:text-action transition-colors duration-300"
+                  >
+                    {article.author.name}
+                  </Link>
+                </>
+              ) : null}
+              {article.author && article.publishedAt ? " · " : null}
+              {article.publishedAt ? formatDate(article.publishedAt) : null}
+            </p>
+          ) : null}
         </div>
-      </Link>
+      </div>
     </section>
   );
 }

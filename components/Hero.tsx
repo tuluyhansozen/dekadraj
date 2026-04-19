@@ -21,23 +21,27 @@ export function Hero() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="pt-16 animate-bounce">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#7D0A0A"
-            strokeWidth="2"
-            strokeLinecap="square"
-            strokeLinejoin="miter"
-            className="mx-auto"
-            aria-hidden="true"
-            role="presentation"
+        <div className="pt-16">
+          <a
+            href="#content"
+            aria-label="Yazılara geç"
+            className="inline-block animate-bounce rounded-full p-2 text-action hover:opacity-70 transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/50"
           >
-            <line x1="12" y1="5" x2="12" y2="19" />
-            <polyline points="19 12 12 19 5 12" />
-          </svg>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="square"
+              strokeLinejoin="miter"
+              aria-hidden="true"
+            >
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <polyline points="19 12 12 19 5 12" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
