@@ -7,6 +7,7 @@ import {
 } from "@/sanity/client";
 import { urlFor } from "@/sanity/image";
 import { ArticleCard } from "@/components/ArticleCard";
+import { HtmlBackground } from "@/components/HtmlBackground";
 
 export async function generateStaticParams() {
   const slugs = await getAllAuthorSlugs();
@@ -43,7 +44,7 @@ export default async function AuthorPage({
 
   return (
     <div>
-      <style>{`html { background-color: var(--color-ink); }`}</style>
+      <HtmlBackground color="#1F1F1F" />
       {/* Dark Header Section */}
       <section className="bg-ink py-24">
         <div className="max-w-[1400px] mx-auto px-8">
