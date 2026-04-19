@@ -44,6 +44,7 @@ export default async function AuthorPage({
 
   return (
     <div>
+      <style dangerouslySetInnerHTML={{ __html: "html{background-color:#1F1F1F}" }} />
       <HtmlBackground color="#1F1F1F" />
       {/* Dark Header Section */}
       <section className="bg-ink py-24">
