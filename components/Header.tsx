@@ -58,12 +58,18 @@ export function Header() {
     return pathname.startsWith(href);
   };
 
+  const hasDarkHero = /^\/yazarlar\/[^/]+$/.test(pathname);
+  const scrolledClass = hasDarkHero
+    ? "bg-ink border-b border-action"
+    : "bg-canvas border-b border-action";
+  const darkNav = hasDarkHero;
+
   return (
     <>
       <header
         className={`fixed top-0 left-0 w-full z-50 h-[60px] transition-colors duration-300 ${
           isScrolled || isMobileMenuOpen
-            ? "bg-canvas border-b border-action"
+            ? scrolledClass
             : "bg-transparent border-b border-transparent"
         }`}
       >
@@ -87,7 +93,7 @@ export function Header() {
                   className={`font-sans text-[14px] font-medium tracking-[0.28px] transition-colors duration-300 ${
                     isActive(link.href)
                       ? "text-action"
-                      : "text-ink hover:text-action"
+                      : `${darkNav ? "text-canvas" : "text-ink"} hover:text-action`
                   }`}
                   aria-current={isActive(link.href) ? "page" : undefined}
                 >
@@ -96,7 +102,7 @@ export function Header() {
               ))}
             </nav>
 
-            <span className="w-px h-5 bg-ink/20" aria-hidden="true" />
+            <span className={`w-px h-5 ${darkNav ? "bg-canvas/20" : "bg-ink/20"}`} aria-hidden="true" />
 
             <div className="flex items-center gap-4">
             <a
@@ -104,7 +110,7 @@ export function Header() {
               aria-label="Instagram"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ink hover:text-action transition-colors duration-300"
+              className={`${darkNav ? "text-canvas" : "text-ink"} hover:text-action transition-colors duration-300`}
             >
               <svg
                 width="18"
@@ -127,7 +133,7 @@ export function Header() {
               aria-label="X (Twitter)"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ink hover:text-action transition-colors duration-300"
+              className={`${darkNav ? "text-canvas" : "text-ink"} hover:text-action transition-colors duration-300`}
             >
               <svg
                 width="18"
@@ -144,7 +150,7 @@ export function Header() {
               aria-label="Letterboxd"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ink hover:text-action transition-colors duration-300"
+              className={`${darkNav ? "text-canvas" : "text-ink"} hover:text-action transition-colors duration-300`}
             >
               <svg
                 width="18"
@@ -169,17 +175,17 @@ export function Header() {
             aria-label={isMobileMenuOpen ? "Menüyü kapat" : "Menüyü aç"}
           >
             <span
-              className={`block w-6 h-[2px] bg-ink transition-transform duration-300 ${
+              className={`block w-6 h-[2px] ${darkNav ? "bg-canvas" : "bg-ink"} transition-transform duration-300 ${
                 isMobileMenuOpen ? "translate-y-[8px] rotate-45" : ""
               }`}
             />
             <span
-              className={`block w-6 h-[2px] bg-ink transition-opacity duration-300 ${
+              className={`block w-6 h-[2px] ${darkNav ? "bg-canvas" : "bg-ink"} transition-opacity duration-300 ${
                 isMobileMenuOpen ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`block w-6 h-[2px] bg-ink transition-transform duration-300 ${
+              className={`block w-6 h-[2px] ${darkNav ? "bg-canvas" : "bg-ink"} transition-transform duration-300 ${
                 isMobileMenuOpen ? "-translate-y-[8px] -rotate-45" : ""
               }`}
             />
