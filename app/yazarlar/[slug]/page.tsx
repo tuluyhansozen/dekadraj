@@ -43,6 +43,7 @@ export default async function AuthorPage({
 
   return (
     <div>
+      <style>{`html { background-color: var(--color-ink); }`}</style>
       {/* Dark Header Section */}
       <section className="bg-ink py-24">
         <div className="max-w-[1400px] mx-auto px-8">
