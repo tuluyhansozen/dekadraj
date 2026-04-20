@@ -69,6 +69,20 @@ export const article = defineType({
       of: [{ type: "reference", to: [{ type: "topic" }] }],
     }),
     defineField({
+      name: "translators",
+      title: "Çevirmenler",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "author" }] }],
+      description: "Yazı bir çeviriyse çevirmenleri ekleyin.",
+    }),
+    defineField({
+      name: "originalLanguage",
+      title: "Orijinal Dil",
+      type: "string",
+      description: "Çevirinin yapıldığı orijinal dil (örn. İngilizce, Fransızca).",
+      hidden: ({ document }) => !document?.translators?.length,
+    }),
+    defineField({
       name: "featured",
       title: "Öne Çıkan",
       type: "boolean",
