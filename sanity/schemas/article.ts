@@ -85,7 +85,7 @@ export const article = defineType({
   preview: {
     select: {
       title: "title",
-      author: "authors[0]->name",
+      author: "authors.0.name",
       media: "coverImage",
     },
     prepare({ title, author, media }) {
