@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
   const resend = new Resend(apiKey);
 
   const { error } = await resend.emails.send({
-    from: "Dekadraj İletişim <noreply@dekadraj.com>",
+    from: "Dekadraj İletişim <onboarding@resend.dev>",
     to: toEmail,
     replyTo: email,
     subject: `Yeni İletişim Mesajı — ${name}`,
