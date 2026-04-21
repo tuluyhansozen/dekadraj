@@ -22,7 +22,7 @@ export function CategoryFilter({ categories }: CategoryFilterProps) {
   };
 
   return (
-    <div className="flex flex-wrap gap-3 mb-8">
+    <div className="flex flex-wrap gap-2">
       <button
         onClick={() => handleFilter(null)}
         className={`font-sans text-xs font-bold uppercase tracking-wider border px-3 py-2 transition-colors duration-300 ${

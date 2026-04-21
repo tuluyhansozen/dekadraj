@@ -33,16 +33,12 @@ export default async function YazilarPage({
   const totalPages = Math.ceil(total / PAGE_SIZE);
 
   return (
-    <section className="max-w-[1400px] mx-auto px-8 py-24">
-      <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-ink mb-12">
-        Arşiv
-      </h1>
-
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
-        <Suspense fallback={null}>
-          <CategoryFilter categories={categories} />
-        </Suspense>
-        <div className="flex flex-col sm:flex-row sm:items-end gap-4">
+    <section className="max-w-[1400px] mx-auto px-8 py-16 md:py-20">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 pb-6 mb-8 border-b border-meta/30">
+        <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-ink">
+          Arşiv
+        </h1>
+        <div className="flex items-end gap-6">
           <Suspense fallback={null}>
             <SearchBar />
           </Suspense>
@@ -50,6 +46,12 @@ export default async function YazilarPage({
             <TopicDropdown topics={topics} />
           </Suspense>
         </div>
+      </div>
+
+      <div className="mb-12">
+        <Suspense fallback={null}>
+          <CategoryFilter categories={categories} />
+        </Suspense>
       </div>
 
       {articles.length > 0 ? (
