@@ -66,6 +66,7 @@ export default async function YazilarPage({
                 coverImage?: { asset: { _ref: string }; alt?: string };
                 category?: { title: string; slug: string };
                 author?: { name: string; slug: string };
+                translators?: { name: string; slug: string }[];
                 publishedAt?: string;
                 topics?: { title: string; slug: string }[];
               }) => (

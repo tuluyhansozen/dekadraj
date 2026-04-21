@@ -73,7 +73,7 @@ function AuthorCard({
           {author.name}
         </h3>
         {author.bio && (
-          <p className="font-sans text-sm text-meta leading-relaxed line-clamp-4">
+          <p className="font-sans text-sm text-meta leading-relaxed whitespace-pre-line">
             {author.bio}
           </p>
         )}
@@ -110,7 +110,7 @@ export default async function HakkimizdaPage() {
           Dekadraj Sinema Kolektifi
         </h1>
 
-        <div className="max-w-3xl mx-auto space-y-6 font-sans text-lg leading-relaxed text-ink/90">
+        <div className="max-w-3xl mx-auto space-y-6 font-sans text-lg leading-relaxed text-ink/90 text-justify hyphens-auto">
           <p>
             Bugün Türkiye'de ve dünyada politika, ekonomi, kültür ve sinema
             alanlarında egemen düzenin; gençler, kadınlar, işçiler, queerler ve

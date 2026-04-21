@@ -20,6 +20,7 @@ const articleFields = `
   coverImage,
   "category": category->{ title, "slug": slug.current },
   "author": authors[0]->{ name, "slug": slug.current, photo, bio },
+  "translators": translators[]->{ name, "slug": slug.current, photo, bio },
   "topics": topics[]->{ title, "slug": slug.current }
 `;
 

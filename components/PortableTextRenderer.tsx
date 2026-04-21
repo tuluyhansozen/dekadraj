@@ -50,7 +50,7 @@ const components: any = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function PortableTextRenderer({ value }: { value: any }) {
   return (
-    <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-ink prose-p:text-ink prose-p:leading-relaxed prose-a:text-action prose-blockquote:border-action prose-blockquote:text-ink prose-blockquote:italic">
+    <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-ink prose-p:text-ink prose-p:leading-relaxed prose-p:text-justify prose-p:hyphens-auto prose-a:text-action prose-blockquote:border-action prose-blockquote:text-ink prose-blockquote:italic">
       <PortableText value={value} components={components} />
     </div>
   );

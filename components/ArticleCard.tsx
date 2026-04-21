@@ -12,6 +12,7 @@ interface ArticleCardProps {
     coverImage?: { asset: { _ref: string }; alt?: string };
     category?: { title: string; slug: string };
     author?: { name: string; slug: string };
+    translators?: { name: string; slug: string }[];
     topics?: { title: string; slug: string }[];
   };
 }
@@ -77,18 +78,36 @@ export function ArticleCard({ article }: ArticleCardProps) {
       ) : null}
 
       {/* Meta */}
-      <p className="font-sans text-sm text-meta">
-        {article.author ? (
-          <Link
-            href={`/yazarlar/${article.author.slug}`}
-            className="hover:text-action transition-colors duration-300"
-          >
-            {article.author.name}
-          </Link>
+      <div className="font-sans text-sm text-meta space-y-1">
+        <p>
+          {article.author ? (
+            <Link
+              href={`/yazarlar/${article.author.slug}`}
+              className="hover:text-action transition-colors duration-300"
+            >
+              {article.author.name}
+            </Link>
+          ) : null}
+          {article.author?.name && article.publishedAt ? " \u2022 " : ""}
+          {article.publishedAt ? formatDate(article.publishedAt) : ""}
+        </p>
+        {article.translators && article.translators.length > 0 ? (
+          <p>
+            Çeviren:{" "}
+            {article.translators.map((t, i) => (
+              <span key={t.slug}>
+                <Link
+                  href={`/yazarlar/${t.slug}`}
+                  className="hover:text-action transition-colors duration-300"
+                >
+                  {t.name}
+                </Link>
+                {i < article.translators!.length - 1 ? ", " : ""}
+              </span>
+            ))}
+          </p>
         ) : null}
-        {article.author?.name && article.publishedAt ? " \u2022 " : ""}
-        {article.publishedAt ? formatDate(article.publishedAt) : ""}
-      </p>
+      </div>
     </article>
   );
 }

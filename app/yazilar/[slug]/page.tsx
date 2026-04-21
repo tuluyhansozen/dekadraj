@@ -76,20 +76,40 @@ export default async function ArticlePage({
           </p>
         ) : null}
 
-        <div className="font-sans text-sm text-meta space-x-4">
-          {article.author ? (
-            <span>
-              Yazan:{" "}
-              <Link
-                href={`/yazarlar/${article.author.slug}`}
-                className="hover:text-action transition-colors duration-300"
-              >
-                {article.author.name}
-              </Link>
-            </span>
-          ) : null}
-          {article.publishedAt ? (
-            <span>{formatDate(article.publishedAt)}</span>
+        <div className="font-sans text-sm text-meta space-y-2">
+          <div className="space-x-4">
+            {article.author ? (
+              <span>
+                Yazan:{" "}
+                <Link
+                  href={`/yazarlar/${article.author.slug}`}
+                  className="hover:text-action transition-colors duration-300"
+                >
+                  {article.author.name}
+                </Link>
+              </span>
+            ) : null}
+            {article.publishedAt ? (
+              <span>{formatDate(article.publishedAt)}</span>
+            ) : null}
+          </div>
+          {article.translators && article.translators.length > 0 ? (
+            <p>
+              Çeviren:{" "}
+              {article.translators.map(
+                (t: { name: string; slug: string }, i: number) => (
+                  <span key={t.slug}>
+                    <Link
+                      href={`/yazarlar/${t.slug}`}
+                      className="hover:text-action transition-colors duration-300"
+                    >
+                      {t.name}
+                    </Link>
+                    {i < article.translators.length - 1 ? ", " : ""}
+                  </span>
+                )
+              )}
+            </p>
           ) : null}
         </div>
       </header>
@@ -145,8 +165,21 @@ export default async function ArticlePage({
             <ShareSidebar title={article.title} slug={article.slug} />
           </div>
 
-          {/* Author Bio */}
-          <AuthorBio author={article.author} />
+          {/* Author / Translator Bio */}
+          {article.translators && article.translators.length > 0 ? (
+            article.translators.map(
+              (t: {
+                name: string;
+                slug: string;
+                bio?: string;
+                photo?: { asset: { _ref: string } };
+              }) => (
+                <AuthorBio key={t.slug} author={t} label="Çevirmen" />
+              )
+            )
+          ) : (
+            <AuthorBio author={article.author} />
+          )}
         </div>
       </div>
 

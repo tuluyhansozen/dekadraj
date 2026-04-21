@@ -9,6 +9,7 @@ interface Article {
   coverImage?: { asset: { _ref: string }; alt?: string };
   category?: { title: string; slug: string };
   author?: { name: string; slug: string };
+  translators?: { name: string; slug: string }[];
   topics?: { title: string; slug: string }[];
 }
 
