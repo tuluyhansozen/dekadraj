@@ -80,7 +80,7 @@ export const article = defineType({
       title: "Orijinal Dil",
       type: "string",
       description: "Çevirinin yapıldığı orijinal dil (örn. İngilizce, Fransızca).",
-      hidden: ({ document }) => !document?.translators?.length,
+      hidden: ({ document }) => !(document as { translators?: unknown[] })?.translators?.length,
     }),
     defineField({
       name: "featured",
