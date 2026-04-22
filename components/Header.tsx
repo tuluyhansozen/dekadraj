@@ -76,11 +76,39 @@ export function Header() {
         <div className="max-w-[1400px] mx-auto px-8 h-full flex items-center justify-between">
           <Link
             href="/"
-            className={`font-sans text-[20px] font-bold tracking-[-0.5px] transition-opacity ${
+            aria-label="Dekadraj — Anasayfa"
+            className={`group flex items-center gap-2.5 font-sans text-[20px] font-bold tracking-[-0.5px] transition-opacity ${
               isActive("/") ? "text-action" : "text-action hover:opacity-80"
             }`}
           >
-            dekadraj
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 32 32"
+              fill="none"
+              aria-hidden="true"
+              className="shrink-0"
+            >
+              <path
+                d="M4 13 V4 H13"
+                stroke="currentColor"
+                strokeWidth="3"
+                fill="none"
+              />
+              <path
+                d="M19 28 H28 V19"
+                stroke="currentColor"
+                strokeWidth="3"
+                fill="none"
+              />
+              <path
+                d="M16 12 V20 M12 16 H20"
+                className={darkNav && !isScrolled ? "stroke-canvas" : "stroke-ink"}
+                strokeWidth="2"
+                strokeLinecap="square"
+              />
+            </svg>
+            <span>dekadraj</span>
           </Link>
 
           {/* Desktop Navigation + Social Icons (grouped right) */}

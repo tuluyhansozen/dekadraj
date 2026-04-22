@@ -10,9 +10,39 @@ export function Footer() {
           <div>
             <Link
               href="/"
-              className="font-sans text-[20px] font-bold text-action tracking-[-0.5px] mb-4 block"
+              aria-label="Dekadraj — Anasayfa"
+              className="group flex items-center gap-3 mb-4 w-fit transition-opacity hover:opacity-80"
             >
-              dekadraj
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 32 32"
+                fill="none"
+                aria-hidden="true"
+                className="shrink-0 text-action"
+              >
+                <path
+                  d="M4 13 V4 H13"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  fill="none"
+                />
+                <path
+                  d="M19 28 H28 V19"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  fill="none"
+                />
+                <path
+                  d="M16 12 V20 M12 16 H20"
+                  className="stroke-ink"
+                  strokeWidth="2"
+                  strokeLinecap="square"
+                />
+              </svg>
+              <span className="font-sans text-[22px] font-bold text-action tracking-[-0.5px]">
+                dekadraj
+              </span>
             </Link>
             <p className="font-sans text-sm text-ink leading-relaxed">
               Konformizmi reddeden, yeni bir bakış, yeni bir anlatım ve yeni
