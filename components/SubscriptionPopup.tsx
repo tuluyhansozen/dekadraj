@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Turnstile } from "./Turnstile";
 
 export function SubscriptionPopup() {
   const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   useEffect(() => {
@@ -48,7 +51,7 @@ export function SubscriptionPopup() {
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, honeypot, turnstileToken }),
       });
 
       if (res.ok) {
@@ -102,6 +105,10 @@ export function SubscriptionPopup() {
           </p>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="hidden" aria-hidden="true">
+              <input type="text" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} tabIndex={-1} autoComplete="off" />
+            </div>
+            <Turnstile onVerify={setTurnstileToken} onExpire={() => setTurnstileToken("")} />
             <input
               type="email"
               value={email}

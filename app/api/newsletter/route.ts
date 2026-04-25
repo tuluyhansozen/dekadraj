@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { rateLimit } from "@/lib/rate-limit";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 const schema = z.object({
   email: z.string().email().max(320),
+  honeypot: z.string().max(0).optional().default(""),
+  turnstileToken: z.string().optional(),
 });
 
 export async function POST(req: NextRequest) {
@@ -22,7 +25,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Geçersiz e-posta." }, { status: 400 });
   }
 
-  const { email } = parsed.data;
+  const { email, honeypot, turnstileToken } = parsed.data;
+
+  if (honeypot) {
+    return NextResponse.json({ ok: true });
+  }
+
+  const turnstileOk = await verifyTurnstile(turnstileToken);
+  if (!turnstileOk) {
+    return NextResponse.json({ error: "İnsan doğrulaması başarısız." }, { status: 400 });
+  }
 
   const apiKey = process.env.MAILCHIMP_API_KEY;
   const listId = process.env.MAILCHIMP_LIST_ID;

@@ -8,6 +8,7 @@ interface NewsletterFormProps {
 
 export function NewsletterForm({ variant = "footer" }: NewsletterFormProps) {
   const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -18,7 +19,7 @@ export function NewsletterForm({ variant = "footer" }: NewsletterFormProps) {
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, honeypot }),
       });
 
       if (res.ok) {
@@ -59,6 +60,9 @@ export function NewsletterForm({ variant = "footer" }: NewsletterFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
+      <div className="hidden" aria-hidden="true">
+        <input type="text" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} tabIndex={-1} autoComplete="off" />
+      </div>
       <label htmlFor="newsletter-email" className="sr-only">
         E-posta adresiniz
       </label>

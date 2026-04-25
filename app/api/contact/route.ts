@@ -2,12 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { Resend } from "resend";
 import { rateLimit } from "@/lib/rate-limit";
+import { verifyTurnstile } from "@/lib/turnstile";
+
+const noNewlines = (v: string) => !/[\r\n]/.test(v);
 
 const schema = z.object({
-  name: z.string().min(2).max(200),
-  email: z.string().email().max(320),
+  name: z.string().min(2).max(200).refine(noNewlines, "Geçersiz karakter."),
+  email: z.string().email().max(320).refine(noNewlines, "Geçersiz karakter."),
   message: z.string().min(10).max(5000),
-  honeypot: z.string().max(0), // spam protection
+  honeypot: z.string().max(0),
+  turnstileToken: z.string().optional(),
 });
 
 function escapeHtml(str: string) {
@@ -35,7 +39,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Geçersiz form verisi." }, { status: 400 });
   }
 
-  const { name, email, message } = parsed.data;
+  const { name, email, message, turnstileToken } = parsed.data;
+
+  const turnstileOk = await verifyTurnstile(turnstileToken);
+  if (!turnstileOk) {
+    return NextResponse.json({ error: "İnsan doğrulaması başarısız." }, { status: 400 });
+  }
 
   const apiKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.CONTACT_EMAIL || "dekadrajsinema@gmail.com";

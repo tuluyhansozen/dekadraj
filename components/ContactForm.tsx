@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
+import { Turnstile } from "./Turnstile";
 
 const contactSchema = z.object({
   name: z.string().min(2, "İsim en az 2 karakter olmalı."),
@@ -16,6 +17,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const {
     register,
@@ -33,7 +35,7 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, turnstileToken }),
       });
       if (res.ok) {
         setStatus("success");
@@ -52,6 +54,7 @@ export function ContactForm() {
       <div className="hidden" aria-hidden="true">
         <input type="text" {...register("honeypot")} tabIndex={-1} autoComplete="off" />
       </div>
+      <Turnstile onVerify={setTurnstileToken} onExpire={() => setTurnstileToken("")} />
 
       <div>
         <label htmlFor="name" className="font-sans text-xs font-bold uppercase tracking-wider text-meta block mb-2">

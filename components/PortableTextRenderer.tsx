@@ -34,16 +34,20 @@ const components: any = {
     }: {
       children: React.ReactNode;
       value: { href: string };
-    }) => (
-      <a
-        href={value.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-action underline hover:opacity-80 transition-opacity"
-      >
-        {children}
-      </a>
-    ),
+    }) => {
+      const href = /^(https?:|mailto:|\/)/i.test(value.href ?? "") ? value.href : null;
+      if (!href) return <>{children}</>;
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-action underline hover:opacity-80 transition-opacity"
+        >
+          {children}
+        </a>
+      );
+    },
   },
 };
 
