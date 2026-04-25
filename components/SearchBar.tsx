@@ -29,34 +29,32 @@ export function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative">
+    <form onSubmit={handleSubmit} className="relative flex items-center group">
       <label htmlFor="archive-search" className="sr-only">
         Yazılarda ara
       </label>
+      <span className="absolute left-3 text-meta group-focus-within:text-action transition-colors duration-200 pointer-events-none">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8" />
+          <path d="M21 21l-4.35-4.35" />
+        </svg>
+      </span>
       <input
         id="archive-search"
-        type="search"
+        type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Ara..."
-        className="bg-transparent border-b-2 border-ink pb-2 font-sans text-sm text-ink placeholder:text-meta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action/30 focus:border-action transition-colors pr-8 w-40 sm:w-48"
+        className="pl-9 pr-8 py-2 border border-meta/40 bg-transparent font-sans text-sm text-ink placeholder:text-meta/60 focus:outline-none focus:border-action transition-colors duration-200 w-44 rounded-none"
       />
       {query && (
         <button
           type="button"
           onClick={handleClear}
-          className="absolute right-0 top-0 text-meta hover:text-action transition-colors p-1"
+          className="absolute right-2.5 text-meta hover:text-action transition-colors duration-200"
           aria-label="Aramayı temizle"
         >
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            aria-hidden="true"
-          >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
             <path d="M18 6L6 18M6 6l12 12" />
           </svg>
         </button>

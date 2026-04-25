@@ -102,8 +102,14 @@ export function ArticleCard({ article }: ArticleCardProps) {
                 </span>
               ))
             : null}
-          {(article.author || (article.coAuthors && article.coAuthors.length > 0)) && article.publishedAt ? " \u2022 " : ""}
-          {article.publishedAt ? formatDate(article.publishedAt) : ""}
+          {!(article.translators && article.translators.length > 0) &&
+            (article.author || (article.coAuthors && article.coAuthors.length > 0)) &&
+            article.publishedAt
+            ? " \u2022 "
+            : ""}
+          {!(article.translators && article.translators.length > 0) && article.publishedAt
+            ? formatDate(article.publishedAt)
+            : ""}
         </p>
         {article.translators && article.translators.length > 0 ? (
           <p>
@@ -119,6 +125,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
                 {i < article.translators!.length - 1 ? ", " : ""}
               </span>
             ))}
+            {article.publishedAt ? <>{" \u2022 "}{formatDate(article.publishedAt)}</> : null}
           </p>
         ) : null}
       </div>
