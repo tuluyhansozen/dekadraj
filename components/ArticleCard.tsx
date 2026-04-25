@@ -12,6 +12,7 @@ interface ArticleCardProps {
     coverImage?: { asset: { _ref: string }; alt?: string };
     category?: { title: string; slug: string };
     author?: { name: string; slug: string };
+    coAuthors?: { name: string; slug: string }[];
     translators?: { name: string; slug: string }[];
     topics?: { title: string; slug: string }[];
   };
@@ -88,7 +89,20 @@ export function ArticleCard({ article }: ArticleCardProps) {
               {article.author.name}
             </Link>
           ) : null}
-          {article.author?.name && article.publishedAt ? " \u2022 " : ""}
+          {article.coAuthors && article.coAuthors.length > 0
+            ? article.coAuthors.map((ca) => (
+                <span key={ca.slug}>
+                  {", "}
+                  <Link
+                    href={`/yazarlar/${ca.slug}`}
+                    className="hover:text-action transition-colors duration-300"
+                  >
+                    {ca.name}
+                  </Link>
+                </span>
+              ))
+            : null}
+          {(article.author || (article.coAuthors && article.coAuthors.length > 0)) && article.publishedAt ? " \u2022 " : ""}
           {article.publishedAt ? formatDate(article.publishedAt) : ""}
         </p>
         {article.translators && article.translators.length > 0 ? (

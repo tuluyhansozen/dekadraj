@@ -12,6 +12,8 @@ interface FeaturedEssayProps {
     coverImage?: { asset: { _ref: string }; alt?: string };
     category?: { title: string; slug: string };
     author?: { name: string; slug: string };
+    coAuthors?: { name: string; slug: string }[];
+    translators?: { name: string; slug: string }[];
   } | null;
 }
 
@@ -62,22 +64,53 @@ export function FeaturedEssay({ article }: FeaturedEssayProps) {
             ) : null}
           </Link>
 
-          {article.author || article.publishedAt ? (
-            <p className="font-sans text-sm text-meta">
-              {article.author ? (
-                <>
-                  Yazan:{" "}
-                  <Link
-                    href={`/yazarlar/${article.author.slug}`}
-                    className="hover:text-action transition-colors duration-300"
-                  >
-                    {article.author.name}
-                  </Link>
-                </>
+          {(article.author || article.publishedAt) ? (
+            <div className="font-sans text-sm text-meta space-y-1">
+              <p>
+                {article.author ? (
+                  <>
+                    Yazar:{" "}
+                    <Link
+                      href={`/yazarlar/${article.author.slug}`}
+                      className="hover:text-action transition-colors duration-300"
+                    >
+                      {article.author.name}
+                    </Link>
+                    {article.coAuthors && article.coAuthors.length > 0
+                      ? article.coAuthors.map((ca) => (
+                          <span key={ca.slug}>
+                            {", "}
+                            <Link
+                              href={`/yazarlar/${ca.slug}`}
+                              className="hover:text-action transition-colors duration-300"
+                            >
+                              {ca.name}
+                            </Link>
+                          </span>
+                        ))
+                      : null}
+                  </>
+                ) : null}
+                {article.author && article.publishedAt ? " · " : null}
+                {article.publishedAt ? formatDate(article.publishedAt) : null}
+              </p>
+              {article.translators && article.translators.length > 0 ? (
+                <p>
+                  Çeviren:{" "}
+                  {article.translators.map((t, i) => (
+                    <span key={t.slug}>
+                      <Link
+                        href={`/yazarlar/${t.slug}`}
+                        className="hover:text-action transition-colors duration-300"
+                      >
+                        {t.name}
+                      </Link>
+                      {i < article.translators!.length - 1 ? ", " : ""}
+                    </span>
+                  ))}
+                </p>
               ) : null}
-              {article.author && article.publishedAt ? " · " : null}
-              {article.publishedAt ? formatDate(article.publishedAt) : null}
-            </p>
+            </div>
           ) : null}
         </div>
       </div>

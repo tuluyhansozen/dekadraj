@@ -8,6 +8,7 @@ interface ListViewProps {
     slug: string;
     publishedAt: string;
     author?: { name: string };
+    coAuthors?: { name: string }[];
   }[];
 }
 
@@ -37,7 +38,7 @@ export function ListView({ articles }: ListViewProps) {
               {/* Author */}
               <div className="md:col-span-3 md:text-right">
                 <p className="font-sans text-sm text-meta">
-                  {article.author?.name}
+                  {[article.author?.name, ...(article.coAuthors?.map((ca) => ca.name) ?? [])].filter(Boolean).join(", ")}
                 </p>
               </div>
             </article>

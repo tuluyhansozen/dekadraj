@@ -187,9 +187,9 @@ export function Header() {
                 fill="currentColor"
                 aria-hidden="true"
               >
-                <circle cx="8" cy="12" r="6" opacity="0.5" />
-                <circle cx="16" cy="12" r="6" opacity="0.5" />
-                <path d="M12 18a6 6 0 0 0 4-1.5 6 6 0 0 0-8 0 6 6 0 0 0 4 1.5z" />
+                <circle cx="6.5" cy="12" r="5.5" opacity="0.5" />
+                <circle cx="12" cy="12" r="5.5" opacity="0.5" />
+                <circle cx="17.5" cy="12" r="5.5" opacity="0.5" />
               </svg>
             </a>
             </div>

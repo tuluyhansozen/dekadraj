@@ -87,6 +87,19 @@ export default async function ArticlePage({
                 >
                   {article.author.name}
                 </Link>
+                {article.coAuthors && article.coAuthors.length > 0
+                  ? article.coAuthors.map((ca: { name: string; slug: string }) => (
+                      <span key={ca.slug}>
+                        {", "}
+                        <Link
+                          href={`/yazarlar/${ca.slug}`}
+                          className="hover:text-action transition-colors duration-300"
+                        >
+                          {ca.name}
+                        </Link>
+                      </span>
+                    ))
+                  : null}
               </span>
             ) : null}
             {article.publishedAt ? (
@@ -178,7 +191,19 @@ export default async function ArticlePage({
               )
             )
           ) : (
-            <AuthorBio author={article.author} />
+            <>
+              <AuthorBio author={article.author} />
+              {article.coAuthors && article.coAuthors.length > 0
+                ? article.coAuthors.map(
+                    (ca: {
+                      name: string;
+                      slug: string;
+                      bio?: string;
+                      photo?: { asset: { _ref: string } };
+                    }) => <AuthorBio key={ca.slug} author={ca} />
+                  )
+                : null}
+            </>
           )}
         </div>
       </div>

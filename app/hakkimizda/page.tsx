@@ -65,6 +65,11 @@ function AuthorCard({
             Konuk Yazar
           </span>
         )}
+        {!isEditor && !isGuest && (
+          <span className="absolute top-0 left-0 bg-secondary text-meta font-sans text-xs font-medium tracking-wider uppercase px-3 py-1.5">
+            Yazar
+          </span>
+        )}
       </div>
 
       {/* Info */}
