@@ -20,7 +20,7 @@ const articleFields = `
   coverImage,
   "category": category->{ title, "slug": slug.current },
   "author": authors[0]->{ name, "slug": slug.current, photo, bio },
-  "coAuthors": authors[1..]->{ name, "slug": slug.current, photo, bio },
+  "coAuthors": authors[1..20]->{ name, "slug": slug.current, photo, bio },
   "translators": translators[]->{ name, "slug": slug.current, photo, bio },
   "topics": topics[]->{ title, "slug": slug.current }
 `;
@@ -47,7 +47,7 @@ export const getRecentArticles = cache(async (limit: number) => {
 export const getListArticles = cache(async (limit: number) => {
   if (!client) return [];
   return client.fetch(
-    `*[_type == "article"] | order(publishedAt desc)[0...${limit}]{ _id, title, "slug": slug.current, publishedAt, "author": authors[0]->{ name }, "coAuthors": authors[1..]->{ name } }`
+    `*[_type == "article"] | order(publishedAt desc)[0...${limit}]{ _id, title, "slug": slug.current, publishedAt, "author": authors[0]->{ name }, "coAuthors": authors[1..20]->{ name } }`
   );
 });
 
