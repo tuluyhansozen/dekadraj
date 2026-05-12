@@ -38,6 +38,8 @@ export const author = defineType({
           { title: "Yazar", value: "yazar" },
           { title: "Yayın Kurulu", value: "yayin-kurulu" },
           { title: "Konuk Yazar", value: "konuk-yazar" },
+          { title: "Çevirmen", value: "cevirmen" },
+          { title: "Sosyal Medya", value: "sosyal-medya" },
         ],
       },
       initialValue: "yazar",

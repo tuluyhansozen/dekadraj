@@ -58,7 +58,7 @@ export function FeaturedEssay({ article }: FeaturedEssayProps) {
             </h2>
 
             {article.excerpt ? (
-              <p className="font-serif italic text-lg text-ink leading-relaxed opacity-[0.85] mt-6">
+              <p className="font-sans text-sm text-ink leading-relaxed opacity-[0.85] mt-6">
                 {stripQuotes(article.excerpt)}
               </p>
             ) : null}
