@@ -71,7 +71,7 @@ export default async function ArticlePage({
         </h1>
 
         {article.excerpt ? (
-          <p className="font-serif italic text-xl text-ink opacity-80 leading-relaxed">
+          <p className="font-sans text-xl text-ink opacity-80 leading-relaxed">
             {article.excerpt}
           </p>
         ) : null}

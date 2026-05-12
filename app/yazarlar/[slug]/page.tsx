@@ -3,6 +3,7 @@ import Image from "next/image";
 import {
   getAuthorBySlug,
   getArticlesByAuthor,
+  getArticlesByTranslator,
   getAllAuthorSlugs,
 } from "@/sanity/client";
 import { urlFor } from "@/sanity/image";
@@ -35,9 +36,10 @@ export default async function AuthorPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [author, articles] = await Promise.all([
+  const [author, articles, translations] = await Promise.all([
     getAuthorBySlug(slug),
     getArticlesByAuthor(slug),
+    getArticlesByTranslator(slug),
   ]);
 
   if (!author) notFound();
@@ -73,7 +75,7 @@ export default async function AuthorPage({
                 {author.name}
               </h1>
               {author.bio ? (
-                <p className="font-serif italic text-lg text-canvas/80 leading-relaxed max-w-[600px]">
+                <p className="font-sans text-lg text-canvas/80 leading-relaxed max-w-[600px] text-justify">
                   {author.bio}
                 </p>
               ) : null}
@@ -112,6 +114,32 @@ export default async function AuthorPage({
           </p>
         )}
       </section>
+
+      {/* Translations Section */}
+      {translations.length > 0 ? (
+        <section className="max-w-[1400px] mx-auto px-8 pb-24">
+          <h2 className="font-serif text-3xl font-semibold text-ink mb-12">
+            Çevirileri
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+            {translations.map(
+              (article: {
+                _id: string;
+                title: string;
+                slug: string;
+                excerpt?: string;
+                coverImage?: { asset: { _ref: string }; alt?: string };
+                category?: { title: string; slug: string };
+                author?: { name: string; slug: string };
+                publishedAt?: string;
+                topics?: { title: string; slug: string }[];
+              }) => (
+                <ArticleCard key={article._id} article={article} />
+              )
+            )}
+          </div>
+        </section>
+      ) : null}
     </div>
   );
 }

@@ -131,6 +131,14 @@ export const getArticlesByAuthor = cache(async (authorSlug: string) => {
   );
 });
 
+export const getArticlesByTranslator = cache(async (translatorSlug: string) => {
+  if (!client) return [];
+  return client.fetch(
+    `*[_type == "article" && $translatorSlug in translators[]->slug.current] | order(publishedAt desc){ ${articleFields} }`,
+    { translatorSlug }
+  );
+});
+
 export const getAllAuthorSlugs = cache(async () => {
   if (!client) return [];
   return client.fetch(`*[_type == "author"]{ "slug": slug.current }`);
