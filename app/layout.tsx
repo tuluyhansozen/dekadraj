@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SubscriptionPopup } from "@/components/SubscriptionPopup";
@@ -59,6 +60,7 @@ export default function RootLayout({
         <main id="main-content">{children}</main>
         <Footer />
         <SubscriptionPopup />
+        <GoogleAnalytics gaId="G-LJ4SVB12DW" />
       </body>
     </html>
   );
